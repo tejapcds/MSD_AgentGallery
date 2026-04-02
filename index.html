@@ -162,14 +162,14 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#86BC25 0%,#4CAF50 100
 .sec-hd{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .sec-hd::after{content:'';flex:1;height:1px;background:var(--bd)}
 
-.cards-col{display:grid;grid-template-columns:repeat(auto-fill,minmax(500px,1fr));gap:11px;margin-bottom:40px}
+.cards-col{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:11px;margin-bottom:40px}
 
 /* ================================================================
-   HORIZONTAL CARD
+   VERTICAL CARD (inverted length/breadth)
    ================================================================ */
 .card{
-  background:var(--sf);border:1px solid var(--bd);border-left:3px solid transparent;
-  border-radius:var(--R);display:flex;align-items:stretch;min-height:156px;
+  background:var(--sf);border:1px solid var(--bd);border-top:3px solid transparent;
+  border-radius:var(--R);display:flex;flex-direction:column;align-items:stretch;min-height:330px;
   box-shadow:var(--sh);cursor:pointer;position:relative;overflow:hidden;
   transition:transform var(--T) var(--ease),box-shadow var(--T) var(--ease),border-color var(--T) var(--ease);
   animation:su .36s var(--ease) both;
@@ -180,7 +180,7 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#86BC25 0%,#4CAF50 100
 @keyframes su{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
 /* LEFT */
-.cl{width:96px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px 10px;border-right:1px solid var(--bds)}
+.cl{width:100%;flex-shrink:0;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--bds)}
 .cicon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:21px;background:var(--sf2);border:1px solid var(--bd);transition:all var(--T) var(--ease)}
 .card:hover .cicon{background:var(--gg);border-color:var(--gb);box-shadow:0 0 14px rgba(134,188,37,.20)}
 .sdot{display:flex;align-items:center;gap:3px;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
@@ -210,7 +210,7 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#86BC25 0%,#4CAF50 100
 .pb-lbl{font-size:9.5px;color:var(--t3);margin-top:3px;font-family:'DM Mono',monospace}
 
 /* RIGHT */
-.cr{width:200px;flex-shrink:0;padding:18px 18px 18px 14px;display:flex;flex-direction:column;justify-content:space-between;border-left:1px solid var(--bds)}
+.cr{width:100%;flex-shrink:0;padding:16px 16px 16px 16px;display:flex;flex-direction:column;justify-content:space-between;border-left:none;border-top:1px solid var(--bds);background:var(--sf2)}
 .cmeta{display:flex;flex-direction:column;gap:7px}
 .mrow{display:flex;flex-direction:column;gap:1.5px}
 .mlbl{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--t3)}
@@ -286,8 +286,8 @@ footer strong{color:var(--g)}
 @media(max-width:860px){
   header,.fbar-in,.hero,.main{padding-left:20px;padding-right:20px}
   .hero{padding-top:38px;padding-bottom:32px}
-  .cr{display:none}
-  .cl{width:78px}
+  .cr{display:block}
+  .cl{width:100%;padding:12px 12px;border-bottom:1px solid var(--bds)}
   .hstats{flex-direction:column}
   .hstat{border-right:none;border-bottom:1px solid var(--bd)}
   .hstat:last-child{border-bottom:none}
