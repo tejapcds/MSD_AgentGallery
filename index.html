@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>D365 AI Showcase — Deloitte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ================================================================
+   DESIGN TOKENS
+   ================================================================ */
+:root {
+  --g:       #86BC25;
+  --g2:      #6FA01E;
+  --g3:      #4CAF50;
+  --gg:      rgba(134,188,37,0.13);
+  --gg2:     rgba(134,188,37,0.25);
+  --gb:      rgba(134,188,37,0.28);
+
+  --bg:      #F1F3ED;
+  --sf:      #FFFFFF;
+  --sf2:     #F7F9F3;
+  --bd:      #DDE0D6;
+  --bds:     #EAECEA;
+
+  --t1: #111411; --t2: #484D44; --t3: #858D80;
+
+  --ca-bg:#EBF4CC; --ca-tx:#3A5E0C;
+  --ci-bg:#DAE9F7; --ci-tx:#134E80;
+  --cc-bg:#ECE4F7; --cc-tx:#5A228F;
+
+  --sl-bg:#E2F2CF; --sl-tx:#2B6007;
+  --sd-bg:#FFF0C2; --sd-tx:#784800;
+  --sp-bg:#E2EAF7; --sp-tx:#1B3B80;
+
+  --sh:  0 1px 4px rgba(0,0,0,0.05),0 2px 12px rgba(0,0,0,0.04);
+  --shh: 0 4px 24px rgba(134,188,37,0.13),0 2px 8px rgba(0,0,0,0.07);
+  --shm: 0 28px 72px rgba(0,0,0,0.16),0 4px 16px rgba(0,0,0,0.1);
+
+  --ease: cubic-bezier(.4,0,.2,1);
+  --T: .22s;
+  --R: 16px;
+  --HH: 66px;
+  --FH: 54px;
+}
+[data-theme="dark"] {
+  --bg:#0A0C0B; --sf:#131715; --sf2:#191D18; --bd:#23271F; --bds:#191D18;
+  --t1:#DEE3DA; --t2:#8E9889; --t3:#525A4D;
+  --ca-bg:rgba(134,188,37,.10); --ca-tx:#9CCF52;
+  --ci-bg:rgba(55,145,255,.09); --ci-tx:#72B3FF;
+  --cc-bg:rgba(165,90,255,.09); --cc-tx:#BA7FF2;
+  --sl-bg:rgba(134,188,37,.10); --sl-tx:#9CCF52;
+  --sd-bg:rgba(255,182,40,.09); --sd-tx:#EDBC3A;
+  --sp-bg:rgba(70,130,255,.09); --sp-tx:#78A6FF;
+  --sh: 0 1px 4px rgba(0,0,0,.30),0 2px 12px rgba(0,0,0,.22);
+  --shh:0 4px 28px rgba(134,188,37,.13),0 2px 10px rgba(0,0,0,.38);
+}
+
+/* ================================================================
+   BASE
+   ================================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;scrollbar-width:thin;scrollbar-color:var(--bd) transparent}
+html::-webkit-scrollbar{width:5px}
+html::-webkit-scrollbar-thumb{background:var(--bd);border-radius:99px}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--t1);transition:background var(--T) var(--ease),color var(--T) var(--ease);min-height:100vh;overflow-x:hidden}
+
+/* ================================================================
+   ANIMATED GRADIENT ACCENT LINE
+   ================================================================ */
+.grad-bar{height:2.5px;background:linear-gradient(90deg,transparent 0%,#86BC25 25%,#4CAF50 50%,#86BC25 75%,transparent 100%);background-size:200% 100%;animation:gradScroll 4s linear infinite}
+@keyframes gradScroll{from{background-position:200% 0}to{background-position:-200% 0}}
+
+/* ================================================================
+   HEADER
+   ================================================================ */
+header{
+  position:sticky;top:0;z-index:200;height:var(--HH);
+  display:flex;align-items:center;padding:0 44px;gap:14px;
+  background:rgba(255,255,255,.93);border-bottom:1px solid var(--bd);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:background var(--T) var(--ease),border-color var(--T) var(--ease);
+}
+[data-theme="dark"] header{background:rgba(19,23,21,.93)}
+
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo-hex{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#86BC25 0%,#4CAF50 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(134,188,37,.32);flex-shrink:0}
+.logo-hex svg{width:18px;height:18px}
+.logo-t .t1n{font-size:14px;font-weight:700;letter-spacing:-.3px;color:var(--t1)}
+.logo-t .t2n{font-size:10.5px;color:var(--t3);font-weight:400}
+.hsp{flex:1}
+.hdr-pill{display:flex;align-items:center;gap:6px;padding:5px 13px;border-radius:99px;background:var(--gg);border:1px solid var(--gb);font-size:12px;font-weight:600;color:var(--g);font-family:'DM Mono',monospace}
+.hdr-pill .dot{width:6px;height:6px;background:var(--g);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.th-btn{width:36px;height:36px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--t2);transition:all var(--T) var(--ease);flex-shrink:0}
+.th-btn:hover{border-color:var(--g);color:var(--g);background:var(--gg)}
+.th-btn svg{width:15px;height:15px}
+.is{display:block}.im{display:none}
+[data-theme="dark"] .is{display:none}[data-theme="dark"] .im{display:block}
+
+/* ================================================================
+   HERO
+   ================================================================ */
+.hero{max-width:1280px;margin:0 auto;padding:60px 44px 48px;position:relative;overflow:hidden}
+/* floating orbs */
+.orb1,.orb2{position:absolute;border-radius:50%;pointer-events:none;filter:blur(72px)}
+.orb1{width:320px;height:320px;background:radial-gradient(circle,rgba(134,188,37,.16) 0%,transparent 70%);top:-60px;right:60px;animation:flt 9s ease-in-out infinite alternate}
+.orb2{width:200px;height:200px;background:radial-gradient(circle,rgba(76,175,80,.12) 0%,transparent 70%);bottom:-30px;left:40px;animation:flt 12s ease-in-out infinite alternate-reverse}
+@keyframes flt{from{transform:translate(0,0)}to{transform:translate(18px,-18px)}}
+
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--g);margin-bottom:20px;padding:5px 12px 5px 7px;background:var(--gg);border:1px solid var(--gb);border-radius:99px}
+.eyebrow-dot{width:20px;height:20px;background:var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.eyebrow-dot svg{width:10px;height:10px;color:#fff}
+h1{font-size:clamp(24px,3.4vw,44px);font-weight:700;line-height:1.1;letter-spacing:-.04em;color:var(--t1);max-width:580px;margin-bottom:14px}
+h1 em{font-style:normal;background:linear-gradient(135deg,#86BC25 0%,#4CAF50 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:14.5px;color:var(--t2);max-width:480px;line-height:1.68;margin-bottom:40px}
+
+.hstats{display:flex;max-width:680px;border:1px solid var(--bd);border-radius:14px;background:var(--sf);overflow:hidden;box-shadow:var(--sh)}
+.hstat{flex:1;min-width:130px;padding:18px 22px;border-right:1px solid var(--bd);position:relative;cursor:default;transition:background var(--T) var(--ease)}
+.hstat:last-child{border-right:none}
+.hstat:hover{background:var(--sf2)}
+.hstat-v{font-size:26px;font-weight:700;letter-spacing:-.05em;font-family:'DM Mono',monospace;color:var(--t1);line-height:1;margin-bottom:4px;display:flex;align-items:flex-end;gap:1px}
+.hstat-v sup{font-size:13px;font-weight:600;color:var(--g);margin-bottom:2px}
+.hstat-l{font-size:11px;color:var(--t3);font-weight:500;letter-spacing:.01em}
+.hstat-bar{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--g),var(--g3));opacity:0;transition:opacity var(--T) var(--ease)}
+.hstat:hover .hstat-bar{opacity:1}
+
+/* ================================================================
+   FILTER + SEARCH BAR (sticky)
+   ================================================================ */
+.filterbar{position:sticky;top:var(--HH);z-index:180;background:var(--sf);border-bottom:1px solid var(--bd);transition:background var(--T) var(--ease)}
+.fbar-in{max-width:1280px;margin:0 auto;padding:0 44px;height:var(--FH);display:flex;align-items:center;gap:7px;overflow-x:auto}
+.fbar-in::-webkit-scrollbar{display:none}
+
+.fb{padding:6px 14px;border-radius:8px;border:1px solid var(--bd);background:transparent;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;color:var(--t2);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all var(--T) var(--ease);flex-shrink:0}
+.fb .fc{font-family:'DM Mono',monospace;font-size:10px;font-weight:600;padding:1px 5px;border-radius:4px;background:var(--bds);color:var(--t3);transition:all var(--T) var(--ease)}
+.fb:hover{border-color:var(--g);color:var(--t1);background:var(--gg)}
+.fb.active{background:var(--g);border-color:var(--g);color:#fff}
+.fb.active .fc{background:rgba(255,255,255,.22);color:#fff}
+
+.fdiv{width:1px;height:18px;background:var(--bd);flex-shrink:0;margin:0 3px}
+.fsp{flex:1}
+
+.sp-group{display:flex;gap:5px;flex-shrink:0}
+.sp{padding:5px 10px;border-radius:99px;border:1px solid var(--bd);background:transparent;font-size:11px;font-weight:600;cursor:pointer;color:var(--t3);white-space:nowrap;font-family:'DM Sans',sans-serif;transition:all var(--T) var(--ease)}
+.sp:hover{border-color:var(--g);color:var(--g)}
+.sp.active{border-color:var(--g);color:var(--g);background:var(--gg)}
+
+.sw{position:relative;display:flex;align-items:center;flex-shrink:0}
+.sw svg{position:absolute;left:9px;width:13px;height:13px;color:var(--t3);pointer-events:none}
+#si{padding:6px 11px 6px 30px;border:1px solid var(--bd);border-radius:8px;background:var(--sf2);font-family:'DM Sans',sans-serif;font-size:12.5px;color:var(--t1);width:190px;transition:all var(--T) var(--ease);outline:none}
+#si::placeholder{color:var(--t3)}
+#si:focus{border-color:var(--g);box-shadow:0 0 0 3px var(--gg);width:230px}
+
+/* ================================================================
+   MAIN
+   ================================================================ */
+.main{max-width:1280px;margin:0 auto;padding:32px 44px 100px}
+
+.sec-hd{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.sec-hd::after{content:'';flex:1;height:1px;background:var(--bd)}
+
+.cards-col{display:grid;grid-template-columns:repeat(auto-fill,minmax(500px,1fr));gap:11px;margin-bottom:40px}
+
+/* ================================================================
+   HORIZONTAL CARD
+   ================================================================ */
+.card{
+  background:var(--sf);border:1px solid var(--bd);border-left:3px solid transparent;
+  border-radius:var(--R);display:flex;align-items:stretch;min-height:156px;
+  box-shadow:var(--sh);cursor:pointer;position:relative;overflow:hidden;
+  transition:transform var(--T) var(--ease),box-shadow var(--T) var(--ease),border-color var(--T) var(--ease);
+  animation:su .36s var(--ease) both;
+}
+.card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 50%,rgba(134,188,37,.05) 0%,transparent 55%);pointer-events:none;opacity:0;transition:opacity var(--T) var(--ease)}
+.card:hover::before{opacity:1}
+.card:hover{border-left-color:var(--g);border-color:rgba(134,188,37,.32);box-shadow:var(--shh);transform:translateY(-2px)}
+@keyframes su{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* LEFT */
+.cl{width:96px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px 10px;border-right:1px solid var(--bds)}
+.cicon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:21px;background:var(--sf2);border:1px solid var(--bd);transition:all var(--T) var(--ease)}
+.card:hover .cicon{background:var(--gg);border-color:var(--gb);box-shadow:0 0 14px rgba(134,188,37,.20)}
+.sdot{display:flex;align-items:center;gap:3px;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.sdot::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sdot.pub{color:var(--sl-tx)}.sdot.pub::before{background:var(--sl-tx);box-shadow:0 0 5px rgba(43,96,7,.4)}
+.sdot.inp{color:var(--sp-tx)}.sdot.inp::before{background:var(--sp-tx);animation:bp 1.6s infinite}
+.sdot.dem{color:var(--sd-tx)}.sdot.dem::before{background:var(--sd-tx)}
+@keyframes bp{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* MIDDLE */
+.cm{flex:1;padding:18px 20px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.cn{font-size:15px;font-weight:700;letter-spacing:-.025em;color:var(--t1);line-height:1.25}
+.cd{font-size:12.5px;color:var(--t2);line-height:1.62;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ctags{display:flex;gap:5px;flex-wrap:wrap;margin-top:1px}
+.ctag{font-size:9.5px;font-weight:700;letter-spacing:.04em;padding:2.5px 7px;border-radius:5px}
+.ctag.a{background:var(--ca-bg);color:var(--ca-tx)}
+.ctag.i{background:var(--ci-bg);color:var(--ci-tx)}
+.ctag.c{background:var(--cc-bg);color:var(--cc-tx)}
+.sbadge{font-size:9.5px;font-weight:700;letter-spacing:.04em;padding:2.5px 7px;border-radius:5px}
+.sbadge.live{background:var(--sl-bg);color:var(--sl-tx)}
+.sbadge.demo{background:var(--sd-bg);color:var(--sd-tx)}
+.sbadge.prog{background:var(--sp-bg);color:var(--sp-tx)}
+
+.pb-wrap{margin-top:3px}
+.pb-bg{height:3px;background:var(--bd);border-radius:99px;overflow:hidden}
+.pb-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--g),var(--g3));transition:width .6s var(--ease)}
+.pb-lbl{font-size:9.5px;color:var(--t3);margin-top:3px;font-family:'DM Mono',monospace}
+
+/* RIGHT */
+.cr{width:200px;flex-shrink:0;padding:18px 18px 18px 14px;display:flex;flex-direction:column;justify-content:space-between;border-left:1px solid var(--bds)}
+.cmeta{display:flex;flex-direction:column;gap:7px}
+.mrow{display:flex;flex-direction:column;gap:1.5px}
+.mlbl{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--t3)}
+.mval{font-size:11px;color:var(--t2);font-weight:500;line-height:1.4}
+.eff{display:inline-flex;align-items:center;gap:3px;padding:2.5px 7px;border-radius:5px;background:var(--gg);border:1px solid var(--gb);font-size:10.5px;font-weight:700;color:var(--g);font-family:'DM Mono',monospace}
+.eff svg{width:9px;height:9px}
+.cta-row{display:flex;align-items:center;justify-content:flex-end}
+.cta{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--t3);transition:all var(--T) var(--ease)}
+.cta-arr{width:22px;height:22px;border-radius:6px;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;transition:all var(--T) var(--ease)}
+.cta-arr svg{width:10px;height:10px}
+.card:hover .cta{color:var(--g)}
+.card:hover .cta-arr{background:var(--g);border-color:var(--g);color:#fff;transform:translateX(3px)}
+
+/* empty */
+.empty{text-align:center;padding:80px 20px;color:var(--t3)}
+.empty svg{width:42px;height:42px;margin:0 auto 12px;opacity:.3}
+.empty p{font-size:14px;color:var(--t2);margin-bottom:5px}
+
+/* ================================================================
+   MODAL
+   ================================================================ */
+.bk{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(5px);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .24s var(--ease)}
+.bk.open{opacity:1;pointer-events:all}
+.modal{background:var(--sf);border:1px solid var(--bd);border-radius:20px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;box-shadow:var(--shm);transform:translateY(22px) scale(.97);transition:transform .28s cubic-bezier(.34,1.2,.64,1);scrollbar-width:thin;scrollbar-color:var(--bd) transparent}
+.bk.open .modal{transform:none}
+.mh{padding:24px 26px 18px;border-bottom:1px solid var(--bds);display:flex;align-items:flex-start;gap:14px;position:sticky;top:0;background:var(--sf);z-index:1;border-radius:20px 20px 0 0}
+.mi{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--sf2);border:1px solid var(--bd);flex-shrink:0}
+.mht{flex:1}
+.mn{font-size:19px;font-weight:700;letter-spacing:-.04em;color:var(--t1);margin-bottom:7px}
+.mbd{display:flex;gap:5px;flex-wrap:wrap}
+.mcl{width:30px;height:30px;border-radius:7px;border:1px solid var(--bd);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t3);transition:all var(--T) var(--ease);flex-shrink:0}
+.mcl:hover{border-color:#e53e3e;color:#e53e3e;background:rgba(229,62,62,.08)}
+.mcl svg{width:12px;height:12px}
+.mb{padding:0 26px 26px}
+.msec{padding:20px 0;border-bottom:1px solid var(--bds)}
+.msec:last-child{border-bottom:none}
+.mst{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:11px}
+.mst svg{width:13px;height:13px;color:var(--g)}
+.mtx{font-size:13.5px;color:var(--t2);line-height:1.72}
+.fl{list-style:none;display:flex;flex-direction:column;gap:7px}
+.fl li{font-size:13px;color:var(--t2);line-height:1.5;display:flex;align-items:flex-start;gap:9px}
+.fl li::before{content:'';width:16px;height:16px;flex-shrink:0;margin-top:1px;background:var(--gg);border:1.5px solid var(--g);border-radius:4px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.5l2 2 4-4' stroke='%2386BC25' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:10px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mkv{background:var(--sf2);border:1px solid var(--bds);border-radius:10px;padding:13px 15px}
+.mkv .k{font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.mkv .v{font-size:12.5px;color:var(--t2);font-weight:500;line-height:1.5}
+.meff{background:linear-gradient(135deg,rgba(134,188,37,.08) 0%,rgba(76,175,80,.05) 100%);border:1px solid var(--gb);border-radius:12px;padding:15px 17px;display:flex;align-items:center;gap:13px}
+.meff-ico{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--g),var(--g3));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.meff-ico svg{width:17px;height:17px;color:#fff}
+.meff-val{font-size:22px;font-weight:700;color:var(--g);font-family:'DM Mono',monospace;letter-spacing:-.04em;line-height:1}
+.meff-lbl{font-size:12px;color:var(--t2);margin-top:3px}
+.vph{border-radius:12px;border:1px solid var(--bd);aspect-ratio:16/9;background:var(--sf2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.vph svg{width:42px;height:42px;color:var(--g);opacity:.6}
+.vph p{font-size:12px;color:var(--t3);font-weight:500}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+footer{border-top:1px solid var(--bd);padding:22px 44px}
+.fin{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer p{font-size:11.5px;color:var(--t3)}
+footer strong{color:var(--g)}
+
+/* ================================================================
+   SCROLL REVEAL
+   ================================================================ */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .46s var(--ease),transform .46s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media(max-width:860px){
+  header,.fbar-in,.hero,.main{padding-left:20px;padding-right:20px}
+  .hero{padding-top:38px;padding-bottom:32px}
+  .cr{display:none}
+  .cl{width:78px}
+  .hstats{flex-direction:column}
+  .hstat{border-right:none;border-bottom:1px solid var(--bd)}
+  .hstat:last-child{border-bottom:none}
+  .cards-col{grid-template-columns:1fr}
+  #si{width:140px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-wrap">
+    <div class="logo-hex">
+      <svg viewBox="0 0 18 18" fill="none">
+        <path d="M9 2L15.5 6V12L9 16L2.5 12V6L9 2Z" fill="white" fill-opacity=".9"/>
+        <path d="M9 5.5L12.5 7.5V11.5L9 13.5L5.5 11.5V7.5L9 5.5Z" fill="#86BC25"/>
+      </svg>
+    </div>
+    <div class="logo-t">
+      <div class="t1n">D365 AI Showcase</div>
+      <div class="t2n">Agents &amp; Accelerators · Deloitte</div>
+    </div>
+  </div>
+  <div class="hsp"></div>
+  <div class="hdr-pill">
+    <span class="dot"></span>
+    <span id="hc">26</span>&nbsp;Active Solutions
+  </div>
+  <button class="th-btn" id="thbtn" aria-label="Toggle theme">
+    <svg class="is" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+      <line x1="4.22" y1="4.22" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.78" y2="19.78"/>
+      <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="im" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+    </svg>
+  </button>
+</header>
+
+<!-- ANIMATED GRADIENT LINE -->
+<div class="grad-bar"></div>
+
+<!-- HERO -->
+<section class="hero rv">
+  <div class="orb1"></div><div class="orb2"></div>
+  <div class="eyebrow">
+    <div class="eyebrow-dot">
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 1v4l2.5 1.5"/><circle cx="6" cy="6" r="5"/>
+      </svg>
+    </div>
+    Powered by Microsoft Dynamics 365 &amp; Power Platform
+  </div>
+  <h1>Enterprise AI <em>Agents</em><br/>& Accelerators</h1>
+  <p class="hero-sub">Premium delivery accelerators, industry solutions, and agentic AI built on the Microsoft Dynamics 365 ecosystem — engineered for enterprise scale.</p>
+  <div class="hstats">
+    <div class="hstat">
+      <div class="hstat-v"><sup>⚡</sup><span id="sv1">13</span></div>
+      <div class="hstat-l">Delivery Accelerators</div>
+      <div class="hstat-bar"></div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-v"><sup>🏛</sup><span id="sv2">9</span></div>
+      <div class="hstat-l">Industry Solutions</div>
+      <div class="hstat-bar"></div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-v"><sup>🤖</sup><span id="sv3">4</span></div>
+      <div class="hstat-l">Agentic AI Solutions</div>
+      <div class="hstat-bar"></div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-v"><sup>📈</sup>40<span style="font-size:15px;color:var(--g)">%</span></div>
+      <div class="hstat-l">Avg. Efficiency Gain</div>
+      <div class="hstat-bar"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filterbar">
+  <div class="fbar-in">
+    <button class="fb active" data-filter="all">All <span class="fc" id="fca">26</span></button>
+    <button class="fb" data-filter="Delivery Accelerator">Delivery Accelerators <span class="fc" id="fcda">13</span></button>
+    <button class="fb" data-filter="Industry Solutions">Industry Solutions <span class="fc" id="fcis">9</span></button>
+    <button class="fb" data-filter="Agentic AI Solution">Agentic AI <span class="fc" id="fcai">4</span></button>
+    <div class="fdiv"></div>
+    <div class="sp-group">
+      <button class="sp active" data-stage="all">All Stages</button>
+      <button class="sp" data-stage="Published">✓ Published</button>
+      <button class="sp" data-stage="In Progress">⟳ In Progress</button>
+      <button class="sp" data-stage="Demo">▷ Demo</button>
+    </div>
+    <div class="fsp"></div>
+    <div class="sw">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="si" placeholder="Search solutions…" autocomplete="off"/>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main"><div id="cr"></div></main>
+
+<!-- MODAL -->
+<div class="bk" id="bk">
+  <div class="modal" id="modal">
+    <div class="mh">
+      <div class="mi" id="mi">🤖</div>
+      <div class="mht">
+        <div class="mn" id="mn">—</div>
+        <div class="mbd" id="mbd"></div>
+      </div>
+      <button class="mcl" id="mcl" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mb" id="mbo"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fin">
+    <p>© 2025 <strong>Deloitte</strong> — Enterprise AI Center of Excellence · Microsoft Dynamics 365 &amp; Power Platform</p>
+    <p style="font-size:10.5px">Internal Use Only · Leadership Showcase</p>
+  </div>
+</footer>
+
+<script>
+/* ================================================================
+   DATA
+   ================================================================ */
+const agents = [
+  // ── DELIVERY ACCELERATORS ──────────────────────────────────────
+  {name:"dIntelli365",category:"Delivery Accelerator",icon:"⚡",stage:"Published",status:"Live",
+   shortDescription:"GenAI-powered Visual Studio extension for Power Platform with AI code generation, refactoring, review, unit test generation, and one-click deployment.",
+   fullDescription:"dIntelli365 is a GenAI based Visual Studio extension designed specifically for Power Platform Development. It offers a comprehensive suite of tools, including AI Code Generation from various supported LLM models, Code Refactoring, Code Review, Unit Test Generation, and One-Click deployment from Visual Studio.",
+   features:["AI Code Generation from multiple supported LLM models","Automated Code Refactoring and intelligent Code Review","Unit Test Generation for Power Platform components","One-Click deployment directly from Visual Studio","Seamless integration with Power Platform development workflows"],
+   projectsUsed:"FS Connect (Internal Project)",efficiency:"30% reduction in build time",efficiencyRaw:"30%",
+   investmentNeeded:"Low — self-service VS extension",
+   publishedDetails:"Available on Deloitte internal marketplace. Compatible with VS 2022+.",progress:100,
+   additionalNotes:"Supports GPT-4, Claude, and Azure OpenAI as LLM backends. Actively maintained by the D365 CoE team."},
+
+  {name:"dbatchFramework",category:"Delivery Accelerator",icon:"⚙️",stage:"Published",status:"Live",
+   shortDescription:"Common batch framework enabling quick batch creation, monitoring, logging, and multi-source file movement from a Model-Driven App.",
+   fullDescription:"dbatchFramework is a common batch framework for a Quick Start Batch Creation with Common Code. Batch Monitoring, Batch Logging and exception handling from Model App. Schedule batches via WebJobs, Power Automates, Logic Apps directly from Model App. Move Files from Multiple Sources.",
+   features:["Quick Start Batch Creation with reusable common code","Real-time Batch Monitoring and Logging from Model App","Centralized exception handling and error reporting","Schedule batches via WebJobs, Power Automates, and Logic Apps","Multi-source file movement and orchestration"],
+   projectsUsed:"Multiple internal D365 delivery projects",efficiency:"~35% reduction in batch development effort",efficiencyRaw:"35%",
+   investmentNeeded:"Low — reusable framework",publishedDetails:"Production-ready. Used across 5+ client engagements.",progress:100,
+   additionalNotes:"Plug-and-play architecture. Supports Azure Blob, SharePoint, and FTP as file sources."},
+
+  {name:"dTrekBorg",category:"Delivery Accelerator",icon:"🔄",stage:"Published",status:"Live",
+   shortDescription:"Ready-to-use migration accelerator for moving metadata and data from Salesforce to Microsoft Dynamics 365.",
+   fullDescription:"dTrekBorg serves as a ready-to-use tool specifically designed for metadata configuration and migration. It facilitates the migration of both metadata and data from Salesforce to Microsoft Dynamics, acting as a significant accelerator in the migration process.",
+   features:["End-to-end metadata configuration and migration","Salesforce to Microsoft Dynamics data migration","Significant acceleration of the migration lifecycle","Automated metadata extraction and transformation","Validation and rollback capabilities during migration"],
+   projectsUsed:"AmeriGas, ABA migrations",efficiency:"30–40% reduction in migration effort",efficiencyRaw:"30–40%",
+   investmentNeeded:"Medium — project-specific configuration required",publishedDetails:"Available for SFDC → D365 migration engagements.",progress:100,
+   additionalNotes:"Covers standard objects, custom objects, picklist values, workflows, and relationships."},
+
+  {name:"dAuditor360",category:"Delivery Accelerator",icon:"🔍",stage:"Published",status:"Live",
+   shortDescription:"Single-screen audit view across multiple related tables with download, filter, query, and deleted-value restore capabilities.",
+   fullDescription:"dAuditor360 is a Single Screen Audit View of multiple related tables. Download Audit history, Filter and query Audit History & Restore deleted value through Audit. It gives business a holistic view of the changes done to all the related data.",
+   features:["Unified single-screen audit view across related tables","Downloadable audit history reports in Excel format","Advanced filter and query capabilities for audit trails","Restore deleted values through audit history","Holistic business view of data changes across the organization"],
+   projectsUsed:"ABS, multiple government sector projects",efficiency:"~25% reduction in audit investigation time",efficiencyRaw:"25%",
+   investmentNeeded:"Low — model-driven app add-on",publishedDetails:"Works with any D365 environment. Plug-in enabled.",progress:100,
+   additionalNotes:"Supports restore of individual field values. Fully configurable per entity."},
+
+  {name:"dSecurityUpdater",category:"Delivery Accelerator",icon:"🔐",stage:"Published",status:"Live",
+   shortDescription:"Excel-template-driven security role creation and update tool reducing developer dependency in Dynamics 365 and Power Platform.",
+   fullDescription:"dSecurityUpdater allows any system admin/business user to create/update security roles with the help of an excel template. It reduces developer dependency to create/update security roles in MSD/power platform.",
+   features:["Excel-template-driven security role creation and updates","Empowers system admins and business users directly","Reduces developer dependency for role management","Compatible with Microsoft Dynamics and Power Platform","Bulk security role operations from a single template"],
+   projectsUsed:"ABS, ABA, internal CoE",efficiency:"~30% reduction in security configuration effort",efficiencyRaw:"30%",
+   investmentNeeded:"Very Low — template-based",publishedDetails:"Supports all OOB and custom security role structures.",progress:100,
+   additionalNotes:"Ideal during Go-Live waves and environment refreshes. No code required for business admins."},
+
+  {name:"dUserAccessManager",category:"Delivery Accelerator",icon:"👥",stage:"Published",status:"Live",
+   shortDescription:"Bulk user profile management tool for updating security roles, business units, teams, and field security profiles via Excel.",
+   fullDescription:"dUserAccessManager allows system users to update Security Roles, Business Unit, Teams, Field security profile and user personalization settings in bulk, based on data captured in excel. This tool minimizes manual effort in updating User Profile manually and is very helpful during Development lifecycle and post Go-Live for regular Prod User Maintenance.",
+   features:["Bulk update of Security Roles, Business Units, and Teams","Field security profile and personalization settings management","Excel-based data input for streamlined operations","Minimizes manual effort during development and post-go-live","Ideal for regular Production User Maintenance workflows"],
+   projectsUsed:"ABS, ABA",efficiency:"~20% reduction in post-config effort",efficiencyRaw:"20%",
+   investmentNeeded:"Very Low — Excel-driven tool",publishedDetails:"Batch processes 500+ users in a single run.",progress:100,
+   additionalNotes:"Handles user onboarding, role transfers, and offboarding scenarios with full audit trail."},
+
+  {name:"dOrgScanner",category:"Delivery Accelerator",icon:"🔎",stage:"Published",status:"Live",
+   shortDescription:"CRM org crawler analyzing customizations, record counts, workflows, and third-party tools for migration effort pre-assessment.",
+   fullDescription:"dOrgScanner will crawl any Dynamics CRM Org and analyzes the customizations, Records count, workflows and external / third party tools. This helps as an estimator / prescan tool for migrations from one Org to other. Migration from On premise to Cloud.",
+   features:["Comprehensive Dynamics CRM Org crawling and analysis","Customization and record count assessment","Workflow and third-party tool detection","Migration effort estimation and pre-scan reporting","Supports On-premise to Cloud migration scoping"],
+   projectsUsed:"AmeriGas, ABA",efficiency:"30–40% reduction in estimation time",efficiencyRaw:"30–40%",
+   investmentNeeded:"Low — read-only scan tool",publishedDetails:"Non-invasive. Requires only read access to target org.",progress:100,
+   additionalNotes:"Output is a structured Excel report covering entities, attributes, dependencies, and estimated migration complexity."},
+
+  {name:"dBriskDeploy",category:"Delivery Accelerator",icon:"🚀",stage:"Published",status:"Live",
+   shortDescription:"DevOps setup with 6 Azure DevOps pipelines automating Dynamics 365 solution deployment, post-config, and CI/CD.",
+   fullDescription:"dBriskDeploy is a DEVOPS setup with 6 AzureDevOps build pipelines. This will automate the solution deployment to the MS Dynamics CRM. Automates the post deployment configuration. Continuous integration and release capabilities are included.",
+   features:["6 pre-built Azure DevOps build pipelines for Dynamics CRM","Automated solution deployment to MS Dynamics","Post-deployment configuration automation","Continuous Integration and Continuous Release capabilities","Standardized DevOps best practices out-of-the-box"],
+   projectsUsed:"Internal CoE, ABS delivery",efficiency:"~45% reduction in deployment cycle time",efficiencyRaw:"45%",
+   investmentNeeded:"Medium — Azure DevOps subscription required",publishedDetails:"YAML pipeline templates available in Deloitte internal repos.",progress:100,
+   additionalNotes:"Supports multi-env release trains: Dev → SIT → UAT → Prod with approval gates."},
+
+  {name:"dTestRobo",category:"Delivery Accelerator",icon:"🤖",stage:"Published",status:"Live",
+   shortDescription:"Code-free automation testing framework for MS Dynamics using Selenium keywords, cutting testing effort by 50–60%.",
+   fullDescription:"dTestRobo is an Automation Testing framework for MS Dynamics. It is code free scripting using open source Selenium framework and enables test scripts using keywords. Decreases the effort of automation testing effort to 50 - 60 %.",
+   features:["Code-free test scripting using keyword-driven approach","Built on open-source Selenium framework","Reduces automation testing effort by 50–60%","Purpose-built for Microsoft Dynamics CRM testing","Easy test maintenance and reusable keyword library"],
+   projectsUsed:"Multiple D365 UAT phases",efficiency:"50–60% testing effort reduction",efficiencyRaw:"50–60%",
+   investmentNeeded:"Low — open-source base",publishedDetails:"Keyword library covers 200+ D365 UI interactions.",progress:100,
+   additionalNotes:"Can integrate with Azure DevOps test plans for CI/CD-linked regression runs."},
+
+  {name:"dDataMonster",category:"Delivery Accelerator",icon:"🗄️",stage:"Published",status:"Live",
+   shortDescription:"Data migration accelerator for Dynamics 365 that maps staging DBs and auto-generates transformation scripts in 3 steps.",
+   fullDescription:"dDataMonster is a robust data migration accelerator tailored for Microsoft Dynamics 365. It provides migration developers with the ability to map the staging database to Dynamics entities and download the transformation scripts in just three steps. Consequently, it significantly decreases the effort required to produce migration scripts, with reductions of up to 40%.",
+   features:["Three-step staging database to Dynamics entity mapping","Automated transformation script generation and download","Reduces migration scripting effort by up to 40%","Tailored specifically for Microsoft Dynamics 365","Robust error handling and validation built-in"],
+   projectsUsed:"AmeriGas data migration, ABA ETL",efficiency:"20–40% ETL effort reduction",efficiencyRaw:"20–40%",
+   investmentNeeded:"Medium — staging DB setup required",publishedDetails:"Generates SSIS-compatible and Azure Data Factory scripts.",progress:100,
+   additionalNotes:"Supports incremental and full-load migration patterns. Delta tracking built-in."},
+
+  {name:"dRecordMerger",category:"Delivery Accelerator",icon:"🔗",stage:"Published",status:"Live",
+   shortDescription:"Configurable record merging tool for any Dynamics table with selective field-level merge and undo via audit restore.",
+   fullDescription:"dRecordMerger is helpful in Merging Records of any table (Custom/OOB). Configurable screens to selectively pick what to merge. Unmerge records & restore deleted value through Audit.",
+   features:["Merge records across any Custom or OOB Dynamics table","Configurable screens for selective field-level merging","Unmerge records to revert changes","Restore deleted values through audit history","Supports both standard and custom entity merge scenarios"],
+   projectsUsed:"ABS data quality initiative",efficiency:"~30% reduction in data deduplication effort",efficiencyRaw:"30%",
+   investmentNeeded:"Low",publishedDetails:"Works with all D365 entities including Account, Contact, and custom tables.",progress:100,
+   additionalNotes:"Configurable merge rules allow field-level precedence control (keep source / keep target / manual)."},
+
+  {name:"dConfigComparer",category:"Delivery Accelerator",icon:"📊",stage:"Published",status:"Live",
+   shortDescription:"Cross-environment solution and configuration comparison tool generating detailed difference reports for release managers.",
+   fullDescription:"dConfigComparer allows Release Management Users to compare solution components like Entities, Attributes, Security Role, Business Rules, etc across two environments and provides a report of differences. It also compares Configurations like Site Settings, Environment Variables against a master sheet and provide a report with any difference found.",
+   features:["Compare solution components across two Dynamics environments","Coverage for Entities, Attributes, Security Roles, Business Rules","Site Settings and Environment Variables comparison","Detailed difference report for release management","Master sheet baseline comparison for configuration drift detection"],
+   projectsUsed:"ABA, ABS release management",efficiency:"~35% reduction in release validation time",efficiencyRaw:"35%",
+   investmentNeeded:"Very Low",publishedDetails:"Runs comparison in under 10 minutes for large orgs.",progress:100,
+   additionalNotes:"Exports a colour-coded Excel report with added/removed/modified components clearly marked."},
+
+  {name:"dSchemaCreator",category:"Delivery Accelerator",icon:"🏗️",stage:"Published",status:"Live",
+   shortDescription:"CSV-based utility to bulk-create Entities, Attributes, Relationships, and Option Sets in Dataverse with built-in error handling.",
+   fullDescription:"dSchemaCreator is a utility tool that is used to create Entities, Attributes, Relationships, and Option sets in the dataverse through an import file in the CSV format. It is highly efficient and also has error handling functionality which allows users to review any failures due to bad data.",
+   features:["CSV-based creation of Entities, Attributes, and Relationships","Option Set creation and management in Dataverse","High-efficiency bulk schema import capability","Built-in error handling for bad data identification","User-friendly failure review and resolution workflow"],
+   projectsUsed:"Multiple greenfield D365 builds",efficiency:"~40% configuration efficiency gain",efficiencyRaw:"40%",
+   investmentNeeded:"Very Low",publishedDetails:"Supports all Dataverse attribute types including lookup, multi-select, and polymorphic.",progress:100,
+   additionalNotes:"Error log CSV output allows batch correction and re-import without restarting from scratch."},
+
+  // ── INDUSTRY SOLUTIONS ────────────────────────────────────────
+  {name:"dVegetation Management",category:"Industry Solutions",icon:"🌿",stage:"In Progress",status:"In Progress",
+   shortDescription:"End-to-end vegetation inspection, work order management, and regulatory compliance tracking for utility providers.",
+   fullDescription:"dVegetation Management is a Dynamics 365-based solution for utility companies to manage vegetation inspection cycles, automate work orders, and ensure regulatory compliance. It integrates field data capture with GIS mapping to deliver end-to-end vegetation lifecycle management.",
+   features:["Automated vegetation inspection scheduling and tracking","Work order generation and field crew dispatch","GIS-integrated mapping for spatial vegetation data","Regulatory compliance reporting and audit trails","Real-time mobile data capture for field teams"],
+   projectsUsed:"Utility sector pilot engagement",efficiency:"~25% reduction in inspection cycle time",efficiencyRaw:"25%",
+   investmentNeeded:"High — GIS integration and field device rollout",publishedDetails:"Pilot phase completed. Full rollout in progress.",progress:60,
+   additionalNotes:"Integrates with ESRI ArcGIS and Microsoft Azure Maps for spatial data visualization."},
+
+  {name:"dChild Welfare",category:"Industry Solutions",icon:"🧒",stage:"In Progress",status:"In Progress",
+   shortDescription:"Case management platform for child welfare agencies tracking cases, placements, safety assessments, and court documentation.",
+   fullDescription:"dChild Welfare is a comprehensive Dynamics 365 solution tailored for government child welfare agencies. It manages case intake, child placements, safety assessments, court documentation, and inter-agency collaboration—ensuring child safety outcomes are at the center of every workflow.",
+   features:["End-to-end case intake and child placement management","Safety assessment and risk scoring tools","Court documentation and legal compliance tracking","Inter-agency collaboration and information sharing","Regulatory reporting and outcome measurement dashboards"],
+   projectsUsed:"State government child services agency",efficiency:"~30% improvement in case processing speed",efficiencyRaw:"30%",
+   investmentNeeded:"High — compliance and data privacy requirements",publishedDetails:"Requirements complete. Build phase in progress.",progress:50,
+   additionalNotes:"Designed to meet federal CCWIS compliance requirements. Fully auditable case history."},
+
+  {name:"dFSConnect",category:"Industry Solutions",icon:"🏦",stage:"Published",status:"Live",
+   shortDescription:"Financial services integration hub connecting core banking, CRM, and regulatory systems within the Dynamics 365 ecosystem.",
+   fullDescription:"dFSConnect is a financial services connectivity solution built on Dynamics 365 that bridges core banking platforms, CRM, and regulatory systems. It enables seamless data flow, customer 360 views, and compliant reporting for retail and commercial banking institutions.",
+   features:["Core banking and CRM integration layer","Customer 360-degree view aggregation","Regulatory and compliance reporting automation","Real-time transaction and event streaming","Pre-built connectors for leading financial platforms"],
+   projectsUsed:"FS Connect (Internal Project), BFSI client rollout",efficiency:"~35% reduction in integration development time",efficiencyRaw:"35%",
+   investmentNeeded:"Medium — connector licensing",publishedDetails:"Generally available for BFSI practice engagements.",progress:100,
+   additionalNotes:"Pre-built adapters for Temenos, Finacle, and FIS Systematics core banking platforms."},
+
+  {name:"dFieldConnect",category:"Industry Solutions",icon:"🔧",stage:"In Progress",status:"In Progress",
+   shortDescription:"Mobile-first field service solution connecting technicians, dispatchers, and back-office with IoT and scheduling intelligence.",
+   fullDescription:"dFieldConnect is a Dynamics 365 Field Service accelerator that empowers field technicians with mobile tools, optimized scheduling, IoT sensor integration, and real-time communication with dispatchers. It reduces response times and improves first-time fix rates across service organizations.",
+   features:["Optimized scheduling and intelligent dispatch routing","Mobile-first technician interface with offline support","IoT sensor integration for proactive maintenance","Real-time communication between field and back-office","First-time fix rate analytics and performance dashboards"],
+   projectsUsed:"Utilities sector field ops engagement",efficiency:"~20% improvement in first-time fix rate",efficiencyRaw:"20%",
+   investmentNeeded:"Medium — mobile device rollout",publishedDetails:"Beta in field testing with two client teams.",progress:65,
+   additionalNotes:"Powered by D365 Field Service + Azure IoT Hub. Works offline with 72-hr data sync."},
+
+  {name:"dImmunization",category:"Industry Solutions",icon:"💉",stage:"In Progress",status:"In Progress",
+   shortDescription:"Public health immunization tracking system managing vaccination records, schedules, and outbreak response coordination.",
+   fullDescription:"dImmunization is a public health solution built on Dynamics 365 that manages community immunization programs, patient vaccination records, appointment scheduling, and outbreak response coordination. It supports health authorities in achieving coverage targets and maintaining population immunity data.",
+   features:["Patient vaccination record management and tracking","Immunization schedule creation and appointment booking","Coverage reporting and population health dashboards","Outbreak response coordination workflows","Integration with national immunization registries"],
+   projectsUsed:"Public health authority pilot",efficiency:"~40% reduction in manual record entry",efficiencyRaw:"40%",
+   investmentNeeded:"High — HL7 FHIR integration required",publishedDetails:"Design phase complete. Development in progress.",progress:40,
+   additionalNotes:"FHIR R4 compliant. Integrates with regional IIS (Immunization Information Systems)."},
+
+  {name:"Property Tax Elevation",category:"Industry Solutions",icon:"🏛️",stage:"In Progress",status:"In Progress",
+   shortDescription:"Local government property tax assessment, appeals management, and taxpayer self-service portal on Dynamics 365.",
+   fullDescription:"Property Tax Elevation is a Dynamics 365 accelerator for local government agencies managing property tax assessment, billing, appeals, and collections. It provides a unified platform for assessors, auditors, and citizens, with self-service portals and automated notification workflows.",
+   features:["Property assessment and valuation management","Appeals intake, tracking, and resolution workflows","Automated billing and payment processing integration","Citizen self-service portal for tax inquiries","Audit-ready reporting and compliance documentation"],
+   projectsUsed:"County government tax authority",efficiency:"~30% reduction in appeals processing time",efficiencyRaw:"30%",
+   investmentNeeded:"High — payment gateway and GIS integrations",publishedDetails:"Discovery complete. Solution design underway.",progress:35,
+   additionalNotes:"Supports parcel-level data management with CAD integration. Portal built on Power Pages."},
+
+  {name:"dIDS",category:"Industry Solutions",icon:"🔌",stage:"In Progress",status:"In Progress",
+   shortDescription:"Integrated Data Services platform for secure cross-agency data sharing, master data governance, and unified analytics.",
+   fullDescription:"dIDS (Integrated Data Services) is a Dynamics 365-based solution that enables secure cross-agency data sharing, master data management, and analytics. It provides governance frameworks, data quality controls, and interoperability standards to unify fragmented government or enterprise data assets.",
+   features:["Secure cross-agency data sharing and interoperability","Master data management and data quality controls","Governance framework and access policy enforcement","Unified analytics and reporting across data domains","Pre-built integration adapters for legacy systems"],
+   projectsUsed:"Multi-agency government data initiative",efficiency:"~35% reduction in data reconciliation effort",efficiencyRaw:"35%",
+   investmentNeeded:"High — enterprise architecture investment",publishedDetails:"Architecture approved. Phase 1 build in progress.",progress:45,
+   additionalNotes:"Built on Azure Data Factory + Purview + D365 Dataverse. Supports GDPR and FedRAMP controls."},
+
+  {name:"dRegulatory",category:"Industry Solutions",icon:"📋",stage:"In Progress",status:"In Progress",
+   shortDescription:"Regulatory compliance and licensing platform for government bodies managing permits, inspections, and enforcement actions.",
+   fullDescription:"dRegulatory is a Dynamics 365 solution designed for regulatory bodies and government agencies to manage licensing, permits, inspections, and enforcement actions. It automates application intake, review workflows, and compliance monitoring to improve regulatory efficiency and public accountability.",
+   features:["License and permit application intake and processing","Inspection scheduling and findings management","Enforcement action tracking and escalation workflows","Compliance monitoring and automated renewal notifications","Public-facing portal for applicant self-service"],
+   projectsUsed:"State regulatory authority engagement",efficiency:"~25% reduction in permit processing time",efficiencyRaw:"25%",
+   investmentNeeded:"Medium — Power Pages portal required",publishedDetails:"Requirements gathered. Design phase underway.",progress:30,
+   additionalNotes:"Workflow engine built on Power Automate with configurable approval chains per license type."},
+
+  {name:"dWorkPath",category:"Industry Solutions",icon:"💼",stage:"In Progress",status:"In Progress",
+   shortDescription:"Workforce development platform connecting job seekers, employers, and training programs for coordinated career management.",
+   fullDescription:"dWorkPath is a Dynamics 365 workforce management solution that supports employment agencies in managing job seeker cases, employer relationships, training program enrollment, and placement outcomes. It drives coordinated career development and reduces time-to-employment for program participants.",
+   features:["Job seeker case intake and career plan management","Employer relationship and job opening tracking","Training program enrollment and progress monitoring","Placement outcome tracking and performance reporting","Referral and inter-agency service coordination"],
+   projectsUsed:"State workforce development board",efficiency:"~20% reduction in time-to-placement",efficiencyRaw:"20%",
+   investmentNeeded:"Medium",publishedDetails:"Pilot underway with two workforce development offices.",progress:55,
+   additionalNotes:"Integrates with state job boards and LinkedIn via Power Automate connectors."},
+
+  // ── AGENTIC AI SOLUTIONS ────────────────────────────────────
+  {name:"Sales Assistant",category:"Agentic AI Solution",icon:"💬",stage:"Demo",status:"Demo",
+   shortDescription:"AI co-pilot for sales reps surfacing insights, drafting communications, and guiding deal progression in Dynamics 365 Sales.",
+   fullDescription:"Sales Assistant is a Microsoft Copilot-powered agent embedded in Dynamics 365 Sales. It synthesizes CRM data, email history, and market signals to provide sellers with actionable next-step recommendations, auto-drafted emails, meeting summaries, and pipeline risk alerts—accelerating deal velocity.",
+   features:["AI-generated next-best-action recommendations for sales reps","Automated email and proposal drafting from CRM context","Meeting summary and action item extraction","Pipeline risk scoring and opportunity health alerts","Real-time CRM data synthesis and customer intelligence"],
+   projectsUsed:"Internal Deloitte sales enablement demo",efficiency:"~30% improvement in rep productivity",efficiencyRaw:"30%",
+   investmentNeeded:"Medium — Microsoft Copilot licensing",publishedDetails:"Demo-ready. Client showcase available on request.",progress:80,
+   additionalNotes:"Powered by Azure OpenAI GPT-4o. Integrates natively with D365 Sales and Teams."},
+
+  {name:"Service Assistant",category:"Agentic AI Solution",icon:"🎧",stage:"Demo",status:"Demo",
+   shortDescription:"AI-powered service agent resolving customer issues faster with knowledge retrieval, response drafting, and case summarization.",
+   fullDescription:"Service Assistant is a Copilot-powered agent for Dynamics 365 Customer Service. It assists agents by retrieving relevant knowledge base articles, drafting response emails, summarizing case history, and recommending resolution steps—enabling faster, more consistent customer service outcomes.",
+   features:["Intelligent knowledge base retrieval and recommendation","AI-drafted customer response and resolution suggestions","Case history summarization for context-aware support","Escalation prediction and proactive routing recommendations","Agent sentiment analysis and quality monitoring"],
+   projectsUsed:"BPO and contact center demo scenarios",efficiency:"~35% reduction in average handle time",efficiencyRaw:"35%",
+   investmentNeeded:"Medium — Copilot for Service licensing",publishedDetails:"Demo available. POC deployable in 2 weeks.",progress:80,
+   additionalNotes:"Supports real-time transcription and AI assist in voice channel via Azure Communication Services."},
+
+  {name:"Customer Agent",category:"Agentic AI Solution",icon:"🤝",stage:"Demo",status:"Demo",
+   shortDescription:"Autonomous AI customer engagement agent handling inquiries, updates, and self-service across web, chat, and voice channels 24/7.",
+   fullDescription:"Customer Agent is an autonomous Copilot-powered bot that interfaces directly with customers across web, chat, and voice channels. It handles FAQs, account inquiries, service requests, and status updates—escalating to human agents only when required, delivering 24/7 consistent service at scale.",
+   features:["Omnichannel customer engagement (web, chat, voice)","Natural language understanding for intent recognition","Autonomous resolution of FAQs and account inquiries","Seamless escalation to human agents with full context transfer","24/7 availability with continuous learning from interactions"],
+   projectsUsed:"Retail banking and insurance demo",efficiency:"~40% deflection of Tier-1 support volume",efficiencyRaw:"40%",
+   investmentNeeded:"Medium — Power Virtual Agents + Copilot Studio",publishedDetails:"Live demo environment available in Deloitte sandbox.",progress:75,
+   additionalNotes:"Built on Microsoft Copilot Studio with D365 Customer Service as backend. GDPR-compliant data handling."},
+
+  {name:"Wealth Advisor Agent",category:"Agentic AI Solution",icon:"📈",stage:"Demo",status:"Demo",
+   shortDescription:"AI co-pilot for wealth advisors delivering portfolio insights, personalized recommendations, and compliance-aligned client briefings.",
+   fullDescription:"Wealth Advisor Agent is a Copilot-powered solution for financial advisors using Dynamics 365. It synthesizes client portfolio data, market trends, and financial goals to generate personalized investment insights, meeting prep briefs, and compliance-aligned recommendation summaries—enabling advisors to deliver premium, data-driven client experiences.",
+   features:["AI-generated client meeting preparation briefs","Portfolio performance analysis and risk profiling","Personalized investment recommendation summaries","Compliance-aligned advice documentation and suitability checks","Real-time market signal integration with client context"],
+   projectsUsed:"Wealth management practice showcase",efficiency:"~25% reduction in advisor prep time per client",efficiencyRaw:"25%",
+   investmentNeeded:"High — market data feed licensing",publishedDetails:"Demo built on D365 + Azure OpenAI + custom data connectors.",progress:70,
+   additionalNotes:"Integrates with Refinitiv / Bloomberg data feeds. Suitability engine aligned with MiFID II requirements."}
+];
+
+/* ================================================================
+   HELPERS
+   ================================================================ */
+function catCls(cat){return cat==="Delivery Accelerator"?"a":cat==="Industry Solutions"?"i":"c"}
+function catLbl(cat){return cat==="Delivery Accelerator"?"Delivery Accelerator":cat==="Industry Solutions"?"Industry Solution":"Agentic AI"}
+function stageCls(s){return s==="Published"?"pub":s==="Demo"?"dem":"inp"}
+function stCls(s){return s==="Live"?"live":s==="Demo"?"demo":"prog"}
+
+/* ================================================================
+   RENDER
+   ================================================================ */
+const CATS = [
+  {key:"Delivery Accelerator", lbl:"Delivery Accelerators"},
+  {key:"Industry Solutions",   lbl:"Industry Solutions"},
+  {key:"Agentic AI Solution",  lbl:"Agentic AI Solutions"}
+];
+
+function renderAll(data){
+  const root = document.getElementById('cr');
+  root.innerHTML = '';
+  if(!data.length){
+    root.innerHTML = `<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>No solutions found</p><small>Try adjusting filters or search</small></div>`;
+    setCount(0); return;
+  }
+  const grouped = {};
+  CATS.forEach(c=>grouped[c.key]=[]);
+  data.forEach(a=>{ if(grouped[a.category]!==undefined) grouped[a.category].push(a); });
+
+  CATS.forEach((cat,ci)=>{
+    const items = grouped[cat.key];
+    if(!items.length) return;
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `<div class="sec-hd rv">${cat.lbl} <span style="color:var(--g);font-family:'DM Mono',monospace">(${items.length})</span></div>`;
+    const col = document.createElement('div');
+    col.className = 'cards-col';
+    items.forEach((a,idx)=>{
+      const gi = agents.indexOf(a);
+      const card = document.createElement('div');
+      card.className = 'card rv';
+      card.style.animationDelay = `${ci*0.06+idx*0.035}s`;
+
+      const prog = a.stage==="In Progress" ? `<div class="pb-wrap"><div class="pb-bg"><div class="pb-fill" style="width:${a.progress}%"></div></div><div class="pb-lbl">${a.progress}% complete</div></div>` : '';
+      const eff = a.efficiencyRaw ? `<div class="mrow"><div class="mlbl">Efficiency Gain</div><div class="mval"><span class="eff"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 8 4 4 7 6 11 2"/><polyline points="8 2 11 2 11 5"/></svg>${a.efficiencyRaw}</span></div></div>` : '';
+      const proj = a.projectsUsed ? `<div class="mrow"><div class="mlbl">Projects Used</div><div class="mval" style="font-size:10.5px">${a.projectsUsed}</div></div>` : '';
+
+      card.innerHTML = `
+        <div class="cl">
+          <div class="cicon">${a.icon}</div>
+          <div class="sdot ${stageCls(a.stage)}">${a.stage}</div>
+        </div>
+        <div class="cm">
+          <div class="cn">${a.name}</div>
+          <div class="cd">${a.shortDescription}</div>
+          <div class="ctags">
+            <span class="ctag ${catCls(a.category)}">${catLbl(a.category)}</span>
+            <span class="sbadge ${stCls(a.status)}">${a.status}</span>
+          </div>
+          ${prog}
+        </div>
+        <div class="cr2">
+          <div class="cmeta">${eff}${proj}<div class="mrow"><div class="mlbl">Investment</div><div class="mval" style="font-size:10.5px">${a.investmentNeeded}</div></div></div>
+          <div class="cta-row"><div class="cta">View Details<div class="cta-arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div></div>
+        </div>`;
+      /* rename .cr class to avoid conflict with CSS variable */
+      card.querySelector('.cr2').className = 'cr';
+      card.addEventListener('click',()=>openModal(gi));
+      col.appendChild(card);
+    });
+    wrap.appendChild(col);
+    root.appendChild(wrap);
+  });
+
+  setCount(data.length);
+  observe();
+}
+
+function setCount(n){
+  document.getElementById('hc').textContent = n;
+}
+
+/* ================================================================
+   FILTER STATE
+   ================================================================ */
+let aCat='all', aStage='all', aQ='';
+
+function filter(){
+  let f = agents;
+  if(aCat!=='all') f=f.filter(a=>a.category===aCat);
+  if(aStage!=='all') f=f.filter(a=>a.stage===aStage);
+  if(aQ.trim()){const q=aQ.toLowerCase();f=f.filter(a=>a.name.toLowerCase().includes(q)||a.shortDescription.toLowerCase().includes(q)||a.category.toLowerCase().includes(q)||(a.projectsUsed&&a.projectsUsed.toLowerCase().includes(q)))}
+  renderAll(f);
+}
+
+document.querySelectorAll('.fb').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); aCat=b.dataset.filter; filter();
+}));
+document.querySelectorAll('.sp').forEach(p=>p.addEventListener('click',()=>{
+  document.querySelectorAll('.sp').forEach(x=>x.classList.remove('active'));
+  p.classList.add('active'); aStage=p.dataset.stage; filter();
+}));
+document.getElementById('si').addEventListener('input',e=>{aQ=e.target.value;filter()});
+
+/* ================================================================
+   MODAL
+   ================================================================ */
+function openModal(idx){
+  const a=agents[idx];
+  document.getElementById('mi').textContent=a.icon;
+  document.getElementById('mn').textContent=a.name;
+  document.getElementById('mbd').innerHTML=`<span class="sbadge ${stCls(a.status)}">${a.status}</span><span class="ctag ${catCls(a.category)}">${catLbl(a.category)}</span><span class="sdot ${stageCls(a.stage)}" style="margin-left:4px;font-size:11px">${a.stage}</span>`;
+
+  const effBlock = a.efficiency?`
+  <div class="msec">
+    <div class="mst"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Business Impact &amp; Efficiency</div>
+    <div class="meff"><div class="meff-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div><div><div class="meff-val">${a.efficiencyRaw}</div><div class="meff-lbl">${a.efficiency}</div></div></div>
+  </div>`:'';
+
+  const progSec = a.stage==="In Progress"?`
+  <div class="msec">
+    <div class="mst"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Completion Status</div>
+    <div class="pb-bg" style="height:6px;background:var(--bd);border-radius:99px;overflow:hidden"><div class="pb-fill" style="width:${a.progress}%;height:100%;background:linear-gradient(90deg,var(--g),var(--g3));border-radius:99px"></div></div>
+    <div style="font-size:11.5px;color:var(--t3);margin-top:7px;font-family:'DM Mono',monospace">${a.progress}% complete · ${a.publishedDetails}</div>
+  </div>` : `
+  <div class="msec">
+    <div class="mst"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Published Details</div>
+    <div class="mtx">${a.publishedDetails}</div>
+  </div>`;
+
+  document.getElementById('mbo').innerHTML = `
+  <div class="msec">
+    <div class="mst"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Overview</div>
+    <div class="mtx">${a.fullDescription}</div>
+  </div>
+  <div class="msec">
+    <div class="mst"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Key Capabilities</div>
+    <ul class="fl">${a.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+  </div>
+  <div class="msec">
+    <div class="mst"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Projects &amp; Investment</div>
+    <div class="mgrid">
+      <div class="mkv"><div class="k">Projects Used</div><div class="v">${a.projectsUsed||'N/A'}</div></div>
+      <div class="mkv"><div class="k">Investment Needed</div><div class="v">${a.investmentNeeded||'N/A'}</div></div>
+    </div>
+  </div>
+  ${effBlock}
+  ${progSec}
+  ${a.additionalNotes?`<div class="msec"><div class="mst"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Additional Notes</div><div class="mtx">${a.additionalNotes}</div></div>`:''}
+  <div class="msec">
+    <div class="mst"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>Demo Video</div>
+    <div class="vph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg><p>Video coming soon · Contact CoE for live demo</p></div>
+  </div>`;
+
+  document.getElementById('bk').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('modal').scrollTop=0;
+}
+
+function closeModal(){document.getElementById('bk').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('mcl').addEventListener('click',closeModal);
+document.getElementById('bk').addEventListener('click',e=>{if(e.target===document.getElementById('bk'))closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+/* ================================================================
+   THEME
+   ================================================================ */
+const htmlEl=document.documentElement;
+const sv=localStorage.getItem('d365v3-theme');
+if(sv)htmlEl.setAttribute('data-theme',sv);
+document.getElementById('thbtn').addEventListener('click',()=>{
+  const n=htmlEl.getAttribute('data-theme')==='dark'?'light':'dark';
+  htmlEl.setAttribute('data-theme',n);localStorage.setItem('d365v3-theme',n);
+});
+
+/* ================================================================
+   SCROLL REVEAL
+   ================================================================ */
+function observe(){
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})},{threshold:.07,rootMargin:'0px 0px -24px 0px'});
+  document.querySelectorAll('.rv:not(.vis)').forEach(el=>io.observe(el));
+}
+
+/* ================================================================
+   FILTER COUNT BADGES
+   ================================================================ */
+function initCounts(){
+  document.getElementById('fca').textContent=agents.length;
+  document.getElementById('fcda').textContent=agents.filter(a=>a.category==="Delivery Accelerator").length;
+  document.getElementById('fcis').textContent=agents.filter(a=>a.category==="Industry Solutions").length;
+  document.getElementById('fcai').textContent=agents.filter(a=>a.category==="Agentic AI Solution").length;
+  document.getElementById('sv1').textContent=agents.filter(a=>a.category==="Delivery Accelerator").length;
+  document.getElementById('sv2').textContent=agents.filter(a=>a.category==="Industry Solutions").length;
+  document.getElementById('sv3').textContent=agents.filter(a=>a.category==="Agentic AI Solution").length;
+}
+
+/* ================================================================
+   INIT
+   ================================================================ */
+initCounts();
+renderAll(agents);
+// reveal hero
+setTimeout(()=>document.querySelectorAll('.hero.rv,.hero-sub,.eyebrow').forEach(el=>el.classList.add('vis')),60);
+observe();
+</script>
+</body>
+</html>
