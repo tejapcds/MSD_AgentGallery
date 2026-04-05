@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>D.A.S.H</title>
+<title>D365 AI Showcase — Deloitte</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -294,122 +294,36 @@ footer strong{color:var(--g)}
   .cards-col{grid-template-columns:1fr}
   #si{width:140px}
 }
-/* ================================================================
-   D.A.S.H HEADER (NEW)
-   ================================================================ */
-.dash-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 44px;
-  border-bottom: 2px solid var(--bd);
-  backdrop-filter: blur(10px);
-  position: sticky;
-  top: 0;
-  z-index: 200;
-}
-
-/* Light Theme */
-[data-theme="light"] .dash-header {
-  background: #ffffff;
-  color: #111;
-}
-
-/* Dark Theme */
-[data-theme="dark"] .dash-header {
-  background: #000000;
-  color: #ffffff;
-  border-color: #222;
-}
-
-/* LEFT */
-.dash-left {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-/* LOGO */
-.dash-logo {
-  position: relative;
-  width: 64px;
-  height: 64px;
-}
-
-.dash-circle {
-  width: 64px;
-  height: 64px;
-  border: 2px solid currentColor;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
-/* Nodes */
-.dash-nodes span {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: currentColor;
-  border-radius: 50%;
-}
-
-.dash-nodes span:nth-child(1) { top: -6px; left: 50%; transform: translateX(-50%); }
-.dash-nodes span:nth-child(2) { bottom: -6px; left: 50%; transform: translateX(-50%); }
-.dash-nodes span:nth-child(3) { left: -6px; top: 50%; transform: translateY(-50%); }
-.dash-nodes span:nth-child(4) { right: -6px; top: 50%; transform: translateY(-50%); }
-
-/* TEXT */
-.dash-title {
-  font-size: 34px;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-
-.dash-sub {
-  font-size: 14px;
-  opacity: 0.7;
-}
-
-/* RIGHT */
-.dash-right {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.dash-right span {
-  color: #86BC25;
-}
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<header class="dash-header">
-  <div class="dash-left">
-    
-    <!-- Logo -->
-    <div class="dash-logo">
-      <div class="dash-circle">D.A.S.H</div>
-      <div class="dash-nodes">
-        <span></span><span></span><span></span><span></span>
-      </div>
+<header>
+  <div class="logo-wrap">
+    <div class="logo-hex">
+      <svg viewBox="0 0 18 18" fill="none">
+        <path d="M9 2L15.5 6V12L9 16L2.5 12V6L9 2Z" fill="white" fill-opacity=".9"/>
+        <path d="M9 5.5L12.5 7.5V11.5L9 13.5L5.5 11.5V7.5L9 5.5Z" fill="#86BC25"/>
+      </svg>
     </div>
-
-    <!-- Title -->
-    <div class="dash-text">
-      <div class="dash-title">D.A.S.H</div>
-      <div class="dash-sub">Dynamics Accelerator Suite Home</div>
+    <div class="logo-t">
+      <div class="t1n">D365 AI Showcase</div>
+      <div class="t2n">Agents &amp; Accelerators · Deloitte</div>
     </div>
-
   </div>
-
-  <!-- Right -->
-  <div class="dash-right">Deloitte<span>.</span></div>
+  <div class="hsp"></div>
+  <button class="th-btn" id="thbtn" aria-label="Toggle theme">
+    <svg class="is" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+      <line x1="4.22" y1="4.22" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.78" y2="19.78"/>
+      <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="im" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+    </svg>
+  </button>
 </header>
 
 <!-- ANIMATED GRADIENT LINE -->
@@ -418,6 +332,14 @@ footer strong{color:var(--g)}
 <!-- HERO -->
 <section class="hero rv">
   <div class="orb1"></div><div class="orb2"></div>
+  <div class="eyebrow">
+    <div class="eyebrow-dot">
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 1v4l2.5 1.5"/><circle cx="6" cy="6" r="5"/>
+      </svg>
+    </div>
+    Powered by Microsoft Dynamics 365 &amp; Power Platform
+  </div>
   <h1>Enterprise AI <em>Agents</em><br/>& Accelerators</h1>
   <p class="hero-sub">Premium delivery accelerators, industry solutions, and agentic AI built on the Microsoft Dynamics 365 ecosystem — engineered for enterprise scale.</p>
   <div class="hstats">
@@ -452,6 +374,12 @@ footer strong{color:var(--g)}
     <button class="fb" data-filter="Industry Solutions">Industry Solutions <span class="fc" id="fcis">9</span></button>
     <button class="fb" data-filter="Agentic AI Solution">Agentic AI <span class="fc" id="fcai">4</span></button>
     <div class="fdiv"></div>
+    <div class="sp-group">
+      <button class="sp active" data-stage="all">All Stages</button>
+      <button class="sp" data-stage="Published">✓ Published</button>
+      <button class="sp" data-stage="In Progress">⟳ In Progress</button>
+      <button class="sp" data-stage="Demo">▷ Demo</button>
+    </div>
     <div class="fsp"></div>
     <div class="sw">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
