@@ -100,6 +100,12 @@
 [data-theme="dark"] .light-logo { display: none; }
 [data-theme="dark"] .dark-logo { display: block; }
 
+.light-dash { display: block; }
+.dark-dash { display: none; }
+
+[data-theme="dark"] .light-dash { display: none; }
+[data-theme="dark"] .dark-dash { display: block; }
+
 [data-theme="dark"] {
   --bg:#0A0C0B; --sf:#131715; --sf2:#191D18; --bd:#23271F; --bds:#191D18;
   --t1:#DEE3DA; --t2:#8E9889; --t3:#525A4D;
@@ -357,7 +363,8 @@ footer strong{color:var(--g)}
   <div class="dash-left">
 
     <!-- DASH IMAGE -->
-    <img src="imgs/DeloitteDASH.png" class="dash-img" />
+    <img src="imgs/DeloitteDashLight.png" class="dash-img light-dash" />
+    <img src="imgs/DeloitteDashDark.png" class="dash-img dark-dash" />
 
     <!-- TEXT -->
     <div class="dash-text">
