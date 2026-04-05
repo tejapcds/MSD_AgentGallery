@@ -240,6 +240,7 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#86BC25 0%,#4CAF50 100
 /* LEFT */
 .cl{width:100%;flex-shrink:0;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--bds)}
 .cicon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:21px;background:var(--sf2);border:1px solid var(--bd);transition:all var(--T) var(--ease)}
+.cicon img{width:100%;height:100%;object-fit:contain;border-radius:inherit;}
 .card:hover .cicon{background:var(--gg);border-color:var(--gb);box-shadow:0 0 14px rgba(134,188,37,.20)}
 .sdot{display:flex;align-items:center;gap:3px;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
 .sdot::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
@@ -747,7 +748,7 @@ function renderAll(data){
 
       card.innerHTML = `
         <div class="cl">
-          <div class="cicon">${a.icon}</div>
+          <div class="cicon"><img src="imgs/dIntelli365.png" alt="${a.name} icon" /></div>
           <div class="sdot ${stCls(a.status)}">${a.status}</div>
         </div>
         <div class="cm">
@@ -798,7 +799,7 @@ document.getElementById('si').addEventListener('input',e=>{aQ=e.target.value;fil
    ================================================================ */
 function openModal(idx){
   const a=agents[idx];
-  document.getElementById('mi').textContent=a.icon;
+  document.getElementById('mi').innerHTML=`<img src="imgs/dIntelli365.png" alt="${a.name} logo" />`;
   document.getElementById('mn').textContent=a.name;
   document.getElementById('mbd').innerHTML=`<span class="sbadge ${stCls(a.status)}">${a.status}</span><span class="ctag ${catCls(a.category)}">${catLbl(a.category)}</span><span class="sdot ${stCls(a.status)}" style="margin-left:4px;font-size:11px">${a.status}</span>`;
 
