@@ -85,15 +85,21 @@ header{
 }
 [data-theme="dark"] header{background:rgba(19,23,21,.93)}
 
-.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.logo-hex{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#86BC25 0%,#4CAF50 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(134,188,37,.32);flex-shrink:0}
-.logo-hex svg{width:18px;height:18px}
-.logo-t .t1n{font-size:14px;font-weight:700;letter-spacing:-.3px;color:var(--t1)}
-.logo-t .t2n{font-size:10.5px;color:var(--t3);font-weight:400}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;transition:all .25s ease}
+.logo-wrap:hover .logo-hex{transform:scale(1.05);box-shadow:0 4px 14px rgba(0,0,0,.4)}
+
+.logo-hex{width:36px;height:36px;border-radius:9px;background:radial-gradient(circle at center,#111 40%,#000 100%);border:1px solid #2a2a2a;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(134,188,37,.35),0 0 24px rgba(134,188,37,.15);flex-shrink:0;transition:all .25s ease}
+.logo-hex svg{width:18px;height:18px;fill:#fff}
+
+.logo-t .t1n{font-size:15px;font-weight:700;letter-spacing:-.2px;color:var(--t1)}
+.logo-t .t2n{font-size:10.5px;color:var(--t3);font-weight:400;opacity:.7}
+
 .hsp{flex:1}
+
 .hdr-pill{display:flex;align-items:center;gap:6px;padding:5px 13px;border-radius:99px;background:var(--gg);border:1px solid var(--gb);font-size:12px;font-weight:600;color:var(--g);font-family:'DM Mono',monospace}
 .hdr-pill .dot{width:6px;height:6px;background:var(--g);border-radius:50%;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 .th-btn{width:36px;height:36px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--t2);transition:all var(--T) var(--ease);flex-shrink:0}
 .th-btn:hover{border-color:var(--g);color:var(--g);background:var(--gg)}
 .th-btn svg{width:15px;height:15px}
