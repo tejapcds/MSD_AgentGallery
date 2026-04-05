@@ -143,10 +143,7 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#86BC25 0%,#4CAF50 100
 .fdiv{width:1px;height:18px;background:var(--bd);flex-shrink:0;margin:0 3px}
 .fsp{flex:1}
 
-.sp-group{display:flex;gap:5px;flex-shrink:0}
-.sp{padding:5px 10px;border-radius:99px;border:1px solid var(--bd);background:transparent;font-size:11px;font-weight:600;cursor:pointer;color:var(--t3);white-space:nowrap;font-family:'DM Sans',sans-serif;transition:all var(--T) var(--ease)}
-.sp:hover{border-color:var(--g);color:var(--g)}
-.sp.active{border-color:var(--g);color:var(--g);background:var(--gg)}
+
 
 .sw{position:relative;display:flex;align-items:center;flex-shrink:0}
 .sw svg{position:absolute;left:9px;width:13px;height:13px;color:var(--t3);pointer-events:none}
@@ -308,8 +305,8 @@ footer strong{color:var(--g)}
       </svg>
     </div>
     <div class="logo-t">
-      <div class="t1n">D365 AI Showcase</div>
-      <div class="t2n">Agents &amp; Accelerators · Deloitte</div>
+      <div class="t1n">D·A·S·H</div>
+      <div class="t2n">Dynamics  Accelerators  Suite  Home</div>
     </div>
   </div>
   <div class="hsp"></div>
@@ -332,14 +329,6 @@ footer strong{color:var(--g)}
 <!-- HERO -->
 <section class="hero rv">
   <div class="orb1"></div><div class="orb2"></div>
-  <div class="eyebrow">
-    <div class="eyebrow-dot">
-      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M6 1v4l2.5 1.5"/><circle cx="6" cy="6" r="5"/>
-      </svg>
-    </div>
-    Powered by Microsoft Dynamics 365 &amp; Power Platform
-  </div>
   <h1>Enterprise AI <em>Agents</em><br/>& Accelerators</h1>
   <p class="hero-sub">Premium delivery accelerators, industry solutions, and agentic AI built on the Microsoft Dynamics 365 ecosystem — engineered for enterprise scale.</p>
   <div class="hstats">
@@ -374,12 +363,6 @@ footer strong{color:var(--g)}
     <button class="fb" data-filter="Industry Solutions">Industry Solutions <span class="fc" id="fcis">9</span></button>
     <button class="fb" data-filter="Agentic AI Solution">Agentic AI <span class="fc" id="fcai">4</span></button>
     <div class="fdiv"></div>
-    <div class="sp-group">
-      <button class="sp active" data-stage="all">All Stages</button>
-      <button class="sp" data-stage="Published">✓ Published</button>
-      <button class="sp" data-stage="In Progress">⟳ In Progress</button>
-      <button class="sp" data-stage="Demo">▷ Demo</button>
-    </div>
     <div class="fsp"></div>
     <div class="sw">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -426,7 +409,7 @@ footer strong{color:var(--g)}
    ================================================================ */
 const agents = [
   // ── DELIVERY ACCELERATORS ──────────────────────────────────────
-  {name:"dIntelli365",category:"Delivery Accelerator",icon:"⚡",stage:"Published",status:"Live",
+  {name:"dIntelli365",category:"Delivery Accelerator",icon:"⚡",status:"Live",
    shortDescription:"GenAI-powered Visual Studio extension for Power Platform with AI code generation, refactoring, review, unit test generation, and one-click deployment.",
    fullDescription:"dIntelli365 is a GenAI based Visual Studio extension designed specifically for Power Platform Development. It offers a comprehensive suite of tools, including AI Code Generation from various supported LLM models, Code Refactoring, Code Review, Unit Test Generation, and One-Click deployment from Visual Studio.",
    features:["AI Code Generation from multiple supported LLM models","Automated Code Refactoring and intelligent Code Review","Unit Test Generation for Power Platform components","One-Click deployment directly from Visual Studio","Seamless integration with Power Platform development workflows"],
@@ -435,7 +418,7 @@ const agents = [
    publishedDetails:"Available on Deloitte internal marketplace. Compatible with VS 2022+.",progress:100,
    additionalNotes:"Supports GPT-4, Claude, and Azure OpenAI as LLM backends. Actively maintained by the D365 CoE team."},
 
-  {name:"dbatchFramework",category:"Delivery Accelerator",icon:"⚙️",stage:"Published",status:"Live",
+  {name:"dbatchFramework",category:"Delivery Accelerator",icon:"⚙️",status:"Live",
    shortDescription:"Common batch framework enabling quick batch creation, monitoring, logging, and multi-source file movement from a Model-Driven App.",
    fullDescription:"dbatchFramework is a common batch framework for a Quick Start Batch Creation with Common Code. Batch Monitoring, Batch Logging and exception handling from Model App. Schedule batches via WebJobs, Power Automates, Logic Apps directly from Model App. Move Files from Multiple Sources.",
    features:["Quick Start Batch Creation with reusable common code","Real-time Batch Monitoring and Logging from Model App","Centralized exception handling and error reporting","Schedule batches via WebJobs, Power Automates, and Logic Apps","Multi-source file movement and orchestration"],
@@ -443,7 +426,7 @@ const agents = [
    investmentNeeded:"Low — reusable framework",publishedDetails:"Production-ready. Used across 5+ client engagements.",progress:100,
    additionalNotes:"Plug-and-play architecture. Supports Azure Blob, SharePoint, and FTP as file sources."},
 
-  {name:"dTrekBorg",category:"Delivery Accelerator",icon:"🔄",stage:"Published",status:"Live",
+  {name:"dTrekBorg",category:"Delivery Accelerator",icon:"🔄",status:"Live",
    shortDescription:"Ready-to-use migration accelerator for moving metadata and data from Salesforce to Microsoft Dynamics 365.",
    fullDescription:"dTrekBorg serves as a ready-to-use tool specifically designed for metadata configuration and migration. It facilitates the migration of both metadata and data from Salesforce to Microsoft Dynamics, acting as a significant accelerator in the migration process.",
    features:["End-to-end metadata configuration and migration","Salesforce to Microsoft Dynamics data migration","Significant acceleration of the migration lifecycle","Automated metadata extraction and transformation","Validation and rollback capabilities during migration"],
@@ -451,7 +434,7 @@ const agents = [
    investmentNeeded:"Medium — project-specific configuration required",publishedDetails:"Available for SFDC → D365 migration engagements.",progress:100,
    additionalNotes:"Covers standard objects, custom objects, picklist values, workflows, and relationships."},
 
-  {name:"dAuditor360",category:"Delivery Accelerator",icon:"🔍",stage:"Published",status:"Live",
+  {name:"dAuditor360",category:"Delivery Accelerator",icon:"🔍",status:"Live",
    shortDescription:"Single-screen audit view across multiple related tables with download, filter, query, and deleted-value restore capabilities.",
    fullDescription:"dAuditor360 is a Single Screen Audit View of multiple related tables. Download Audit history, Filter and query Audit History & Restore deleted value through Audit. It gives business a holistic view of the changes done to all the related data.",
    features:["Unified single-screen audit view across related tables","Downloadable audit history reports in Excel format","Advanced filter and query capabilities for audit trails","Restore deleted values through audit history","Holistic business view of data changes across the organization"],
@@ -459,7 +442,7 @@ const agents = [
    investmentNeeded:"Low — model-driven app add-on",publishedDetails:"Works with any D365 environment. Plug-in enabled.",progress:100,
    additionalNotes:"Supports restore of individual field values. Fully configurable per entity."},
 
-  {name:"dSecurityUpdater",category:"Delivery Accelerator",icon:"🔐",stage:"Published",status:"Live",
+  {name:"dSecurityUpdater",category:"Delivery Accelerator",icon:"🔐",status:"Live",
    shortDescription:"Excel-template-driven security role creation and update tool reducing developer dependency in Dynamics 365 and Power Platform.",
    fullDescription:"dSecurityUpdater allows any system admin/business user to create/update security roles with the help of an excel template. It reduces developer dependency to create/update security roles in MSD/power platform.",
    features:["Excel-template-driven security role creation and updates","Empowers system admins and business users directly","Reduces developer dependency for role management","Compatible with Microsoft Dynamics and Power Platform","Bulk security role operations from a single template"],
@@ -467,7 +450,7 @@ const agents = [
    investmentNeeded:"Very Low — template-based",publishedDetails:"Supports all OOB and custom security role structures.",progress:100,
    additionalNotes:"Ideal during Go-Live waves and environment refreshes. No code required for business admins."},
 
-  {name:"dUserAccessManager",category:"Delivery Accelerator",icon:"👥",stage:"Published",status:"Live",
+  {name:"dUserAccessManager",category:"Delivery Accelerator",icon:"👥",status:"Live",
    shortDescription:"Bulk user profile management tool for updating security roles, business units, teams, and field security profiles via Excel.",
    fullDescription:"dUserAccessManager allows system users to update Security Roles, Business Unit, Teams, Field security profile and user personalization settings in bulk, based on data captured in excel. This tool minimizes manual effort in updating User Profile manually and is very helpful during Development lifecycle and post Go-Live for regular Prod User Maintenance.",
    features:["Bulk update of Security Roles, Business Units, and Teams","Field security profile and personalization settings management","Excel-based data input for streamlined operations","Minimizes manual effort during development and post-go-live","Ideal for regular Production User Maintenance workflows"],
@@ -475,7 +458,7 @@ const agents = [
    investmentNeeded:"Very Low — Excel-driven tool",publishedDetails:"Batch processes 500+ users in a single run.",progress:100,
    additionalNotes:"Handles user onboarding, role transfers, and offboarding scenarios with full audit trail."},
 
-  {name:"dOrgScanner",category:"Delivery Accelerator",icon:"🔎",stage:"Published",status:"Live",
+  {name:"dOrgScanner",category:"Delivery Accelerator",icon:"🔎",status:"Live",
    shortDescription:"CRM org crawler analyzing customizations, record counts, workflows, and third-party tools for migration effort pre-assessment.",
    fullDescription:"dOrgScanner will crawl any Dynamics CRM Org and analyzes the customizations, Records count, workflows and external / third party tools. This helps as an estimator / prescan tool for migrations from one Org to other. Migration from On premise to Cloud.",
    features:["Comprehensive Dynamics CRM Org crawling and analysis","Customization and record count assessment","Workflow and third-party tool detection","Migration effort estimation and pre-scan reporting","Supports On-premise to Cloud migration scoping"],
@@ -483,7 +466,7 @@ const agents = [
    investmentNeeded:"Low — read-only scan tool",publishedDetails:"Non-invasive. Requires only read access to target org.",progress:100,
    additionalNotes:"Output is a structured Excel report covering entities, attributes, dependencies, and estimated migration complexity."},
 
-  {name:"dBriskDeploy",category:"Delivery Accelerator",icon:"🚀",stage:"Published",status:"Live",
+  {name:"dBriskDeploy",category:"Delivery Accelerator",icon:"🚀",status:"Live",
    shortDescription:"DevOps setup with 6 Azure DevOps pipelines automating Dynamics 365 solution deployment, post-config, and CI/CD.",
    fullDescription:"dBriskDeploy is a DEVOPS setup with 6 AzureDevOps build pipelines. This will automate the solution deployment to the MS Dynamics CRM. Automates the post deployment configuration. Continuous integration and release capabilities are included.",
    features:["6 pre-built Azure DevOps build pipelines for Dynamics CRM","Automated solution deployment to MS Dynamics","Post-deployment configuration automation","Continuous Integration and Continuous Release capabilities","Standardized DevOps best practices out-of-the-box"],
@@ -491,7 +474,7 @@ const agents = [
    investmentNeeded:"Medium — Azure DevOps subscription required",publishedDetails:"YAML pipeline templates available in Deloitte internal repos.",progress:100,
    additionalNotes:"Supports multi-env release trains: Dev → SIT → UAT → Prod with approval gates."},
 
-  {name:"dTestRobo",category:"Delivery Accelerator",icon:"🤖",stage:"Published",status:"Live",
+  {name:"dTestRobo",category:"Delivery Accelerator",icon:"🤖",status:"Live",
    shortDescription:"Code-free automation testing framework for MS Dynamics using Selenium keywords, cutting testing effort by 50–60%.",
    fullDescription:"dTestRobo is an Automation Testing framework for MS Dynamics. It is code free scripting using open source Selenium framework and enables test scripts using keywords. Decreases the effort of automation testing effort to 50 - 60 %.",
    features:["Code-free test scripting using keyword-driven approach","Built on open-source Selenium framework","Reduces automation testing effort by 50–60%","Purpose-built for Microsoft Dynamics CRM testing","Easy test maintenance and reusable keyword library"],
@@ -499,7 +482,7 @@ const agents = [
    investmentNeeded:"Low — open-source base",publishedDetails:"Keyword library covers 200+ D365 UI interactions.",progress:100,
    additionalNotes:"Can integrate with Azure DevOps test plans for CI/CD-linked regression runs."},
 
-  {name:"dDataMonster",category:"Delivery Accelerator",icon:"🗄️",stage:"Published",status:"Live",
+  {name:"dDataMonster",category:"Delivery Accelerator",icon:"🗄️",status:"Live",
    shortDescription:"Data migration accelerator for Dynamics 365 that maps staging DBs and auto-generates transformation scripts in 3 steps.",
    fullDescription:"dDataMonster is a robust data migration accelerator tailored for Microsoft Dynamics 365. It provides migration developers with the ability to map the staging database to Dynamics entities and download the transformation scripts in just three steps. Consequently, it significantly decreases the effort required to produce migration scripts, with reductions of up to 40%.",
    features:["Three-step staging database to Dynamics entity mapping","Automated transformation script generation and download","Reduces migration scripting effort by up to 40%","Tailored specifically for Microsoft Dynamics 365","Robust error handling and validation built-in"],
@@ -507,7 +490,7 @@ const agents = [
    investmentNeeded:"Medium — staging DB setup required",publishedDetails:"Generates SSIS-compatible and Azure Data Factory scripts.",progress:100,
    additionalNotes:"Supports incremental and full-load migration patterns. Delta tracking built-in."},
 
-  {name:"dRecordMerger",category:"Delivery Accelerator",icon:"🔗",stage:"Published",status:"Live",
+  {name:"dRecordMerger",category:"Delivery Accelerator",icon:"🔗",status:"Live",
    shortDescription:"Configurable record merging tool for any Dynamics table with selective field-level merge and undo via audit restore.",
    fullDescription:"dRecordMerger is helpful in Merging Records of any table (Custom/OOB). Configurable screens to selectively pick what to merge. Unmerge records & restore deleted value through Audit.",
    features:["Merge records across any Custom or OOB Dynamics table","Configurable screens for selective field-level merging","Unmerge records to revert changes","Restore deleted values through audit history","Supports both standard and custom entity merge scenarios"],
@@ -515,7 +498,7 @@ const agents = [
    investmentNeeded:"Low",publishedDetails:"Works with all D365 entities including Account, Contact, and custom tables.",progress:100,
    additionalNotes:"Configurable merge rules allow field-level precedence control (keep source / keep target / manual)."},
 
-  {name:"dConfigComparer",category:"Delivery Accelerator",icon:"📊",stage:"Published",status:"Live",
+  {name:"dConfigComparer",category:"Delivery Accelerator",icon:"📊",status:"Live",
    shortDescription:"Cross-environment solution and configuration comparison tool generating detailed difference reports for release managers.",
    fullDescription:"dConfigComparer allows Release Management Users to compare solution components like Entities, Attributes, Security Role, Business Rules, etc across two environments and provides a report of differences. It also compares Configurations like Site Settings, Environment Variables against a master sheet and provide a report with any difference found.",
    features:["Compare solution components across two Dynamics environments","Coverage for Entities, Attributes, Security Roles, Business Rules","Site Settings and Environment Variables comparison","Detailed difference report for release management","Master sheet baseline comparison for configuration drift detection"],
@@ -523,7 +506,7 @@ const agents = [
    investmentNeeded:"Very Low",publishedDetails:"Runs comparison in under 10 minutes for large orgs.",progress:100,
    additionalNotes:"Exports a colour-coded Excel report with added/removed/modified components clearly marked."},
 
-  {name:"dSchemaCreator",category:"Delivery Accelerator",icon:"🏗️",stage:"Published",status:"Live",
+  {name:"dSchemaCreator",category:"Delivery Accelerator",icon:"🏗️",status:"Live",
    shortDescription:"CSV-based utility to bulk-create Entities, Attributes, Relationships, and Option Sets in Dataverse with built-in error handling.",
    fullDescription:"dSchemaCreator is a utility tool that is used to create Entities, Attributes, Relationships, and Option sets in the dataverse through an import file in the CSV format. It is highly efficient and also has error handling functionality which allows users to review any failures due to bad data.",
    features:["CSV-based creation of Entities, Attributes, and Relationships","Option Set creation and management in Dataverse","High-efficiency bulk schema import capability","Built-in error handling for bad data identification","User-friendly failure review and resolution workflow"],
@@ -532,7 +515,7 @@ const agents = [
    additionalNotes:"Error log CSV output allows batch correction and re-import without restarting from scratch."},
 
   // ── INDUSTRY SOLUTIONS ────────────────────────────────────────
-  {name:"dVegetation Management",category:"Industry Solutions",icon:"🌿",stage:"In Progress",status:"In Progress",
+  {name:"dVegetation Management",category:"Industry Solutions",icon:"🌿",status:"In Progress",
    shortDescription:"End-to-end vegetation inspection, work order management, and regulatory compliance tracking for utility providers.",
    fullDescription:"dVegetation Management is a Dynamics 365-based solution for utility companies to manage vegetation inspection cycles, automate work orders, and ensure regulatory compliance. It integrates field data capture with GIS mapping to deliver end-to-end vegetation lifecycle management.",
    features:["Automated vegetation inspection scheduling and tracking","Work order generation and field crew dispatch","GIS-integrated mapping for spatial vegetation data","Regulatory compliance reporting and audit trails","Real-time mobile data capture for field teams"],
@@ -540,7 +523,7 @@ const agents = [
    investmentNeeded:"High — GIS integration and field device rollout",publishedDetails:"Pilot phase completed. Full rollout in progress.",progress:60,
    additionalNotes:"Integrates with ESRI ArcGIS and Microsoft Azure Maps for spatial data visualization."},
 
-  {name:"dChild Welfare",category:"Industry Solutions",icon:"🧒",stage:"In Progress",status:"In Progress",
+  {name:"dChild Welfare",category:"Industry Solutions",icon:"🧒",status:"In Progress",
    shortDescription:"Case management platform for child welfare agencies tracking cases, placements, safety assessments, and court documentation.",
    fullDescription:"dChild Welfare is a comprehensive Dynamics 365 solution tailored for government child welfare agencies. It manages case intake, child placements, safety assessments, court documentation, and inter-agency collaboration—ensuring child safety outcomes are at the center of every workflow.",
    features:["End-to-end case intake and child placement management","Safety assessment and risk scoring tools","Court documentation and legal compliance tracking","Inter-agency collaboration and information sharing","Regulatory reporting and outcome measurement dashboards"],
@@ -548,7 +531,7 @@ const agents = [
    investmentNeeded:"High — compliance and data privacy requirements",publishedDetails:"Requirements complete. Build phase in progress.",progress:50,
    additionalNotes:"Designed to meet federal CCWIS compliance requirements. Fully auditable case history."},
 
-  {name:"dFSConnect",category:"Industry Solutions",icon:"🏦",stage:"Published",status:"Live",
+  {name:"dFSConnect",category:"Industry Solutions",icon:"🏦",status:"Live",
    shortDescription:"Financial services integration hub connecting core banking, CRM, and regulatory systems within the Dynamics 365 ecosystem.",
    fullDescription:"dFSConnect is a financial services connectivity solution built on Dynamics 365 that bridges core banking platforms, CRM, and regulatory systems. It enables seamless data flow, customer 360 views, and compliant reporting for retail and commercial banking institutions.",
    features:["Core banking and CRM integration layer","Customer 360-degree view aggregation","Regulatory and compliance reporting automation","Real-time transaction and event streaming","Pre-built connectors for leading financial platforms"],
@@ -556,7 +539,7 @@ const agents = [
    investmentNeeded:"Medium — connector licensing",publishedDetails:"Generally available for BFSI practice engagements.",progress:100,
    additionalNotes:"Pre-built adapters for Temenos, Finacle, and FIS Systematics core banking platforms."},
 
-  {name:"dFieldConnect",category:"Industry Solutions",icon:"🔧",stage:"In Progress",status:"In Progress",
+  {name:"dFieldConnect",category:"Industry Solutions",icon:"🔧",status:"In Progress",
    shortDescription:"Mobile-first field service solution connecting technicians, dispatchers, and back-office with IoT and scheduling intelligence.",
    fullDescription:"dFieldConnect is a Dynamics 365 Field Service accelerator that empowers field technicians with mobile tools, optimized scheduling, IoT sensor integration, and real-time communication with dispatchers. It reduces response times and improves first-time fix rates across service organizations.",
    features:["Optimized scheduling and intelligent dispatch routing","Mobile-first technician interface with offline support","IoT sensor integration for proactive maintenance","Real-time communication between field and back-office","First-time fix rate analytics and performance dashboards"],
@@ -564,7 +547,7 @@ const agents = [
    investmentNeeded:"Medium — mobile device rollout",publishedDetails:"Beta in field testing with two client teams.",progress:65,
    additionalNotes:"Powered by D365 Field Service + Azure IoT Hub. Works offline with 72-hr data sync."},
 
-  {name:"dImmunization",category:"Industry Solutions",icon:"💉",stage:"In Progress",status:"In Progress",
+  {name:"dImmunization",category:"Industry Solutions",icon:"💉",status:"In Progress",
    shortDescription:"Public health immunization tracking system managing vaccination records, schedules, and outbreak response coordination.",
    fullDescription:"dImmunization is a public health solution built on Dynamics 365 that manages community immunization programs, patient vaccination records, appointment scheduling, and outbreak response coordination. It supports health authorities in achieving coverage targets and maintaining population immunity data.",
    features:["Patient vaccination record management and tracking","Immunization schedule creation and appointment booking","Coverage reporting and population health dashboards","Outbreak response coordination workflows","Integration with national immunization registries"],
@@ -572,7 +555,7 @@ const agents = [
    investmentNeeded:"High — HL7 FHIR integration required",publishedDetails:"Design phase complete. Development in progress.",progress:40,
    additionalNotes:"FHIR R4 compliant. Integrates with regional IIS (Immunization Information Systems)."},
 
-  {name:"Property Tax Elevation",category:"Industry Solutions",icon:"🏛️",stage:"In Progress",status:"In Progress",
+  {name:"Property Tax Elevation",category:"Industry Solutions",icon:"🏛️",status:"In Progress",
    shortDescription:"Local government property tax assessment, appeals management, and taxpayer self-service portal on Dynamics 365.",
    fullDescription:"Property Tax Elevation is a Dynamics 365 accelerator for local government agencies managing property tax assessment, billing, appeals, and collections. It provides a unified platform for assessors, auditors, and citizens, with self-service portals and automated notification workflows.",
    features:["Property assessment and valuation management","Appeals intake, tracking, and resolution workflows","Automated billing and payment processing integration","Citizen self-service portal for tax inquiries","Audit-ready reporting and compliance documentation"],
@@ -580,7 +563,7 @@ const agents = [
    investmentNeeded:"High — payment gateway and GIS integrations",publishedDetails:"Discovery complete. Solution design underway.",progress:35,
    additionalNotes:"Supports parcel-level data management with CAD integration. Portal built on Power Pages."},
 
-  {name:"dIDS",category:"Industry Solutions",icon:"🔌",stage:"In Progress",status:"In Progress",
+  {name:"dIDS",category:"Industry Solutions",icon:"🔌",status:"In Progress",
    shortDescription:"Integrated Data Services platform for secure cross-agency data sharing, master data governance, and unified analytics.",
    fullDescription:"dIDS (Integrated Data Services) is a Dynamics 365-based solution that enables secure cross-agency data sharing, master data management, and analytics. It provides governance frameworks, data quality controls, and interoperability standards to unify fragmented government or enterprise data assets.",
    features:["Secure cross-agency data sharing and interoperability","Master data management and data quality controls","Governance framework and access policy enforcement","Unified analytics and reporting across data domains","Pre-built integration adapters for legacy systems"],
@@ -588,7 +571,7 @@ const agents = [
    investmentNeeded:"High — enterprise architecture investment",publishedDetails:"Architecture approved. Phase 1 build in progress.",progress:45,
    additionalNotes:"Built on Azure Data Factory + Purview + D365 Dataverse. Supports GDPR and FedRAMP controls."},
 
-  {name:"dRegulatory",category:"Industry Solutions",icon:"📋",stage:"In Progress",status:"In Progress",
+  {name:"dRegulatory",category:"Industry Solutions",icon:"📋",status:"In Progress",
    shortDescription:"Regulatory compliance and licensing platform for government bodies managing permits, inspections, and enforcement actions.",
    fullDescription:"dRegulatory is a Dynamics 365 solution designed for regulatory bodies and government agencies to manage licensing, permits, inspections, and enforcement actions. It automates application intake, review workflows, and compliance monitoring to improve regulatory efficiency and public accountability.",
    features:["License and permit application intake and processing","Inspection scheduling and findings management","Enforcement action tracking and escalation workflows","Compliance monitoring and automated renewal notifications","Public-facing portal for applicant self-service"],
@@ -596,7 +579,7 @@ const agents = [
    investmentNeeded:"Medium — Power Pages portal required",publishedDetails:"Requirements gathered. Design phase underway.",progress:30,
    additionalNotes:"Workflow engine built on Power Automate with configurable approval chains per license type."},
 
-  {name:"dWorkPath",category:"Industry Solutions",icon:"💼",stage:"In Progress",status:"In Progress",
+  {name:"dWorkPath",category:"Industry Solutions",icon:"💼",status:"In Progress",
    shortDescription:"Workforce development platform connecting job seekers, employers, and training programs for coordinated career management.",
    fullDescription:"dWorkPath is a Dynamics 365 workforce management solution that supports employment agencies in managing job seeker cases, employer relationships, training program enrollment, and placement outcomes. It drives coordinated career development and reduces time-to-employment for program participants.",
    features:["Job seeker case intake and career plan management","Employer relationship and job opening tracking","Training program enrollment and progress monitoring","Placement outcome tracking and performance reporting","Referral and inter-agency service coordination"],
@@ -605,7 +588,7 @@ const agents = [
    additionalNotes:"Integrates with state job boards and LinkedIn via Power Automate connectors."},
 
   // ── AGENTIC AI SOLUTIONS ────────────────────────────────────
-  {name:"Sales Assistant",category:"Agentic AI Solution",icon:"💬",stage:"Demo",status:"Demo",
+  {name:"Sales Assistant",category:"Agentic AI Solution",icon:"💬",status:"Demo",
    shortDescription:"AI co-pilot for sales reps surfacing insights, drafting communications, and guiding deal progression in Dynamics 365 Sales.",
    fullDescription:"Sales Assistant is a Microsoft Copilot-powered agent embedded in Dynamics 365 Sales. It synthesizes CRM data, email history, and market signals to provide sellers with actionable next-step recommendations, auto-drafted emails, meeting summaries, and pipeline risk alerts—accelerating deal velocity.",
    features:["AI-generated next-best-action recommendations for sales reps","Automated email and proposal drafting from CRM context","Meeting summary and action item extraction","Pipeline risk scoring and opportunity health alerts","Real-time CRM data synthesis and customer intelligence"],
@@ -613,7 +596,7 @@ const agents = [
    investmentNeeded:"Medium — Microsoft Copilot licensing",publishedDetails:"Demo-ready. Client showcase available on request.",progress:80,
    additionalNotes:"Powered by Azure OpenAI GPT-4o. Integrates natively with D365 Sales and Teams."},
 
-  {name:"Service Assistant",category:"Agentic AI Solution",icon:"🎧",stage:"Demo",status:"Demo",
+  {name:"Service Assistant",category:"Agentic AI Solution",icon:"🎧",status:"Demo",
    shortDescription:"AI-powered service agent resolving customer issues faster with knowledge retrieval, response drafting, and case summarization.",
    fullDescription:"Service Assistant is a Copilot-powered agent for Dynamics 365 Customer Service. It assists agents by retrieving relevant knowledge base articles, drafting response emails, summarizing case history, and recommending resolution steps—enabling faster, more consistent customer service outcomes.",
    features:["Intelligent knowledge base retrieval and recommendation","AI-drafted customer response and resolution suggestions","Case history summarization for context-aware support","Escalation prediction and proactive routing recommendations","Agent sentiment analysis and quality monitoring"],
@@ -621,7 +604,7 @@ const agents = [
    investmentNeeded:"Medium — Copilot for Service licensing",publishedDetails:"Demo available. POC deployable in 2 weeks.",progress:80,
    additionalNotes:"Supports real-time transcription and AI assist in voice channel via Azure Communication Services."},
 
-  {name:"Customer Agent",category:"Agentic AI Solution",icon:"🤝",stage:"Demo",status:"Demo",
+  {name:"Customer Agent",category:"Agentic AI Solution",icon:"🤝",status:"Demo",
    shortDescription:"Autonomous AI customer engagement agent handling inquiries, updates, and self-service across web, chat, and voice channels 24/7.",
    fullDescription:"Customer Agent is an autonomous Copilot-powered bot that interfaces directly with customers across web, chat, and voice channels. It handles FAQs, account inquiries, service requests, and status updates—escalating to human agents only when required, delivering 24/7 consistent service at scale.",
    features:["Omnichannel customer engagement (web, chat, voice)","Natural language understanding for intent recognition","Autonomous resolution of FAQs and account inquiries","Seamless escalation to human agents with full context transfer","24/7 availability with continuous learning from interactions"],
@@ -629,7 +612,7 @@ const agents = [
    investmentNeeded:"Medium — Power Virtual Agents + Copilot Studio",publishedDetails:"Live demo environment available in Deloitte sandbox.",progress:75,
    additionalNotes:"Built on Microsoft Copilot Studio with D365 Customer Service as backend. GDPR-compliant data handling."},
 
-  {name:"Wealth Advisor Agent",category:"Agentic AI Solution",icon:"📈",stage:"Demo",status:"Demo",
+  {name:"Wealth Advisor Agent",category:"Agentic AI Solution",icon:"📈",status:"Demo",
    shortDescription:"AI co-pilot for wealth advisors delivering portfolio insights, personalized recommendations, and compliance-aligned client briefings.",
    fullDescription:"Wealth Advisor Agent is a Copilot-powered solution for financial advisors using Dynamics 365. It synthesizes client portfolio data, market trends, and financial goals to generate personalized investment insights, meeting prep briefs, and compliance-aligned recommendation summaries—enabling advisors to deliver premium, data-driven client experiences.",
    features:["AI-generated client meeting preparation briefs","Portfolio performance analysis and risk profiling","Personalized investment recommendation summaries","Compliance-aligned advice documentation and suitability checks","Real-time market signal integration with client context"],
@@ -643,7 +626,6 @@ const agents = [
    ================================================================ */
 function catCls(cat){return cat==="Delivery Accelerator"?"a":cat==="Industry Solutions"?"i":"c"}
 function catLbl(cat){return cat==="Delivery Accelerator"?"Delivery Accelerator":cat==="Industry Solutions"?"Industry Solution":"Agentic AI"}
-function stageCls(s){return s==="Published"?"pub":s==="Demo"?"dem":"inp"}
 function stCls(s){return s==="Live"?"live":s==="Demo"?"demo":"prog"}
 
 /* ================================================================
@@ -679,14 +661,14 @@ function renderAll(data){
       card.className = 'card rv';
       card.style.animationDelay = `${ci*0.06+idx*0.035}s`;
 
-      const prog = a.stage==="In Progress" ? `<div class="pb-wrap"><div class="pb-bg"><div class="pb-fill" style="width:${a.progress}%"></div></div><div class="pb-lbl">${a.progress}% complete</div></div>` : '';
+      const prog = a.status==="In Progress" ? `<div class="pb-wrap"><div class="pb-bg"><div class="pb-fill" style="width:${a.progress}%"></div></div><div class="pb-lbl">${a.progress}% complete</div></div>` : '';
       const eff = a.efficiencyRaw ? `<div class="mrow"><div class="mlbl">Efficiency Gain</div><div class="mval"><span class="eff"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 8 4 4 7 6 11 2"/><polyline points="8 2 11 2 11 5"/></svg>${a.efficiencyRaw}</span></div></div>` : '';
       const proj = a.projectsUsed ? `<div class="mrow"><div class="mlbl">Projects Used</div><div class="mval" style="font-size:10.5px">${a.projectsUsed}</div></div>` : '';
 
       card.innerHTML = `
         <div class="cl">
           <div class="cicon">${a.icon}</div>
-          <div class="sdot ${stageCls(a.stage)}">${a.stage}</div>
+          <div class="sdot ${stCls(a.status)}">${a.status}</div>
         </div>
         <div class="cm">
           <div class="cn">${a.name}</div>
@@ -716,12 +698,11 @@ function renderAll(data){
 /* ================================================================
    FILTER STATE
    ================================================================ */
-let aCat='all', aStage='all', aQ='';
+let aCat='all', aQ='';
 
 function filter(){
   let f = agents;
   if(aCat!=='all') f=f.filter(a=>a.category===aCat);
-  if(aStage!=='all') f=f.filter(a=>a.stage===aStage);
   if(aQ.trim()){const q=aQ.toLowerCase();f=f.filter(a=>a.name.toLowerCase().includes(q)||a.shortDescription.toLowerCase().includes(q)||a.category.toLowerCase().includes(q)||(a.projectsUsed&&a.projectsUsed.toLowerCase().includes(q)))}
   renderAll(f);
 }
@@ -729,10 +710,6 @@ function filter(){
 document.querySelectorAll('.fb').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));
   b.classList.add('active'); aCat=b.dataset.filter; filter();
-}));
-document.querySelectorAll('.sp').forEach(p=>p.addEventListener('click',()=>{
-  document.querySelectorAll('.sp').forEach(x=>x.classList.remove('active'));
-  p.classList.add('active'); aStage=p.dataset.stage; filter();
 }));
 document.getElementById('si').addEventListener('input',e=>{aQ=e.target.value;filter()});
 
@@ -743,7 +720,7 @@ function openModal(idx){
   const a=agents[idx];
   document.getElementById('mi').textContent=a.icon;
   document.getElementById('mn').textContent=a.name;
-  document.getElementById('mbd').innerHTML=`<span class="sbadge ${stCls(a.status)}">${a.status}</span><span class="ctag ${catCls(a.category)}">${catLbl(a.category)}</span><span class="sdot ${stageCls(a.stage)}" style="margin-left:4px;font-size:11px">${a.stage}</span>`;
+  document.getElementById('mbd').innerHTML=`<span class="sbadge ${stCls(a.status)}">${a.status}</span><span class="ctag ${catCls(a.category)}">${catLbl(a.category)}</span><span class="sdot ${stCls(a.status)}" style="margin-left:4px;font-size:11px">${a.status}</span>`;
 
   const effBlock = a.efficiency?`
   <div class="msec">
@@ -751,7 +728,7 @@ function openModal(idx){
     <div class="meff"><div class="meff-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div><div><div class="meff-val">${a.efficiencyRaw}</div><div class="meff-lbl">${a.efficiency}</div></div></div>
   </div>`:'';
 
-  const progSec = a.stage==="In Progress"?`
+  const progSec = a.status==="In Progress"?`
   <div class="msec">
     <div class="mst"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Completion Status</div>
     <div class="pb-bg" style="height:6px;background:var(--bd);border-radius:99px;overflow:hidden"><div class="pb-fill" style="width:${a.progress}%;height:100%;background:linear-gradient(90deg,var(--g),var(--g3));border-radius:99px"></div></div>
