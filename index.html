@@ -1500,8 +1500,8 @@
       object-fit: cover;
       border: 1px solid var(--bd);
       background: var(--sf2);
-      overflow: hidden;         
-      object-fit: cover;  
+      overflow: hidden;
+      object-fit: cover;
     }
 
     .showcase-footer .sf-name {
@@ -1609,8 +1609,49 @@
         grid-template-columns: 1fr;
       }
     }
+
+    #topBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 600;
+
+      color: var(--t1);
+      background: var(--sf);
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+
+      box-shadow: var(--sh);
+      cursor: pointer;
+
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+
+      transition: all .25s var(--ease);
+    }
+
+    /* show when scrolling */
+    #topBtn.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* hover */
+    #topBtn:hover {
+      background: var(--gg);
+      border-color: var(--g);
+      color: var(--g);
+    }
   </style>
 </head>
+
+<button id="topBtn" aria-label="Back to top">↑ Top</button>
 
 <body>
 
@@ -1660,6 +1701,7 @@
       </button>
 
     </div>
+
 
   </header>
 
@@ -2181,6 +2223,23 @@
       observe();
     }
 
+    // show after scroll
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        topBtn.classList.add("show");
+      } else {
+        topBtn.classList.remove("show");
+      }
+    });
+
+    // scroll to top
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
     /* ================================================================
        FILTER STATE
        ================================================================ */
@@ -2294,6 +2353,8 @@
     // reveal hero
     setTimeout(() => document.querySelectorAll('.hero.rv,.hero-sub,.eyebrow').forEach(el => el.classList.add('vis')), 60);
     observe();
+
+
   </script>
 </body>
 
